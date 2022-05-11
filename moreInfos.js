@@ -46,7 +46,9 @@ function moreInfos() {
           }
         }
 
-        name.parentNode.insertBefore(infoDiv, name.nextSibling);
+        if (window.location.href.indexOf('elevage/chevaux/?elevage') > -1 || window.location.href.indexOf('centre/box') > -1) {
+          name.parentNode.insertBefore(infoDiv, name.nextSibling);
+        }
       });
   });
 }

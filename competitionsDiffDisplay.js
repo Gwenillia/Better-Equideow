@@ -140,6 +140,8 @@ function competitionsDiffDisplay() {
   });
 }
 
-setTimeout(() => {
-  competitionsDiffDisplay();
-}, 50);
+if (window.location.href.indexOf('elevage/chevaux/cheval') > -1) {
+  setTimeout(() => {
+    competitionsDiffDisplay();
+  }, 50);
+}
