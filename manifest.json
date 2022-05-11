@@ -10,10 +10,6 @@
     "48": "/images/icon-48x48.png",
     "128": "/images/icon-128x128.png"
   },
-  "permissions": [
-    "activeTab",
-    "tabs"
-  ],
   "content_scripts": [
     {
       "matches": ["https://*.equideow.com/*", "http://*.equideow.com/*", "http://*.howrse.com/*", "https://*.howrse.com/*"],
