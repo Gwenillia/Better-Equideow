@@ -1,0 +1,24 @@
+{
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "fr",
+  "version": "0.1.0",
+  "manifest_version": 3,
+  "icons": {
+    "16": "/images/icon-16x16.png",
+    "32": "/images/icon-32x32.png",
+    "48": "/images/icon-48x48.png",
+    "128": "/images/icon-128x128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://*.equideow.com/*", "http://*.equideow.com/*", "http://*.howrse.com/*", "https://*.howrse.com/*"],
+      "run_at": "document_idle",
+      "js": ["blupBreeding.js", "ECSkillsDisplay.js"]
+    }
+  ]
+}

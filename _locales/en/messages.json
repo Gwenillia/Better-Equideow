@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Better Howrse",
+    "description": "Name of the extension."
+  },
+  "appDesc": {
+    "message": "This extension displays more informations in the game like blup in BF or Skills in EC to make you feel more comfortable when looking for specific horses.",
+    "description": "Description of the extension."
+  }
+}
