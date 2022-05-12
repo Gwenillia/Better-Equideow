@@ -1,14 +1,6 @@
 function moreInfos() {
   const names = document.getElementsByClassName('horsename');
   const namesArr = Array.from(names);
-  // const affixes = document.getElementsByClassName('affixe');
-
-  // Array.from(affixes).forEach((affixe) => {
-  //   const parentNode = affixe.parentNode;
-  //   const br = parentNode.children[1];
-
-  // parentNode.removeChild(br);
-  // })
 
   const regexpBlupHtml = /<td class="last align-right" width="15%" dir="ltr"><strong class="nowrap">[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?<\/strong><\/td>/;
   const regexpPGHtml = /<strong>Total.+[+-]?(?=\d*[.eE])(?=\.?\d)\d*\.?\d*(?:[eE][+-]?\d+)?<\/strong>/;
@@ -59,7 +51,7 @@ function moreInfos() {
           }
         }
         name.parentNode.insertBefore(infoDiv, name.nextSibling);
-        const br = name.parentNode.children[2]
+        const br = name.parentNode.children[2];
         name.parentNode.removeChild(br);
       });
   });
