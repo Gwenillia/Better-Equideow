@@ -35,42 +35,50 @@ function competitionsDiffDisplay() {
 
   const bonusHtml = document.getElementById('bonuses-body-content');
 
-  // Different calculs for bonuses
+  let staminaTotalBonusValue;
+  let speedTotalBonusValue;
+  let dressageTotalBonusValue;
+  let gallopTotalBonusValue;
+  let trotTotalBonusValue;
+  let jumpingTotalBonusValue;
+
   function convert(x) {
     return x.join(',').replace(/[^0-9\.,]/g, '').split(',').map((i) => Number(i));
   }
 
-  const staminaBonuses = bonusHtml.outerHTML.match(/(endurance|stamina).+?[1-9]\d*/g);
-  const staminaBonusesValues = convert(staminaBonuses);
+  if (!bonusHtml.outerHTML.match(/(Ce cheval n'a aucun bonus.|This horse doesn't have any bonuses.)/)) {
+      const staminaBonuses = bonusHtml.outerHTML.match(/(endurance|stamina).+?[1-9]\d*/g);
+      const staminaBonusesValues = convert(staminaBonuses);
 
 
-  const speedBonuses = bonusHtml.outerHTML.match(/(vitesse|speed).+?[1-9]\d*/g);
-  const speedBonusesValues = convert(speedBonuses);
+      const speedBonuses = bonusHtml.outerHTML.match(/(vitesse|speed).+?[1-9]\d*/g);
+      const speedBonusesValues = convert(speedBonuses);
 
 
-  const dressageBonuses = bonusHtml.outerHTML.match(/dressage.+?[1-9]\d*/g);
-  const dressageBonusesValues = convert(dressageBonuses);
+      const dressageBonuses = bonusHtml.outerHTML.match(/dressage.+?[1-9]\d*/g);
+      const dressageBonusesValues = convert(dressageBonuses);
 
 
-  const gallopBonuses = bonusHtml.outerHTML.match(/(galop|gallop).+?[1-9]\d*/g);
-  const gallopBonusesValues = convert(gallopBonuses);
+      const gallopBonuses = bonusHtml.outerHTML.match(/(galop|gallop).+?[1-9]\d*/g);
+      const gallopBonusesValues = convert(gallopBonuses);
 
-  const trotBonuses = bonusHtml.outerHTML.match(/trot.+?[1-9]\d*/g);
-  const trotBonusesValues = convert(trotBonuses);
+      const trotBonuses = bonusHtml.outerHTML.match(/trot.+?[1-9]\d*/g);
+      const trotBonusesValues = convert(trotBonuses);
 
 
-  const jumpingBonuses = bonusHtml.outerHTML.match(/(saut|jumping).+?[1-9]\d*/g);
-  const jumpingBonusesValues = convert(jumpingBonuses);
+      const jumpingBonuses = bonusHtml.outerHTML.match(/(saut|jumping).+?[1-9]\d*/g);
+      const jumpingBonusesValues = convert(jumpingBonuses);
 
-  // all bonuses
-  const reducer = (a, b) => a + b;
+      // all bonuses
+      const reducer = (a, b) => a + b;
 
-  const staminaTotalBonusValue = staminaBonusesValues.reduce(reducer);
-  const speedTotalBonusValue = speedBonusesValues.reduce(reducer);
-  const dressageTotalBonusValue = dressageBonusesValues.reduce(reducer);
-  const gallopTotalBonusValue = gallopBonusesValues.reduce(reducer);
-  const trotTotalBonusValue = trotBonusesValues.reduce(reducer);
-  const jumpingTotalBonusValue = jumpingBonusesValues.reduce(reducer);
+      staminaTotalBonusValue = staminaBonusesValues.reduce(reducer);
+      speedTotalBonusValue = speedBonusesValues.reduce(reducer);
+      dressageTotalBonusValue = dressageBonusesValues.reduce(reducer);
+      gallopTotalBonusValue = gallopBonusesValues.reduce(reducer);
+      trotTotalBonusValue = trotBonusesValues.reduce(reducer);
+      jumpingTotalBonusValue = jumpingBonusesValues.reduce(reducer);
+  }
 
   competitions.forEach((competition) => {
     const diffDiv = document.createElement('div');
