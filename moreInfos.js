@@ -51,10 +51,17 @@ function moreInfos() {
           }
         }
 
-        name.parentNode.insertBefore(infoDiv, name.nextSibling);
+        let locationAllowed;
+        if (window.location.href.indexOf('elevage/chevaux/?elevage') > -1 || window.location.href.indexOf('marche/vente') > -1 || window.location.href.indexOf('centre/box') > -1) {
+          locationAllowed = true;
+        }
+
+        if (locationAllowed) {
+          name.parentNode.insertBefore(infoDiv, name.nextSibling);
+        }
         const br = name.parentNode.children[2];
         br && name.parentNode.removeChild(br);
-        
+
       });
   });
 }
