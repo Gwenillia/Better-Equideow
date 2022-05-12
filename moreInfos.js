@@ -14,6 +14,8 @@ function moreInfos() {
     isFrenchApp = true;
   }
 
+  const isDetailedView = document.getElementById('detail-chevaux');
+
   namesArr.forEach((name) => {
     fetch(name.href)
       .then((res) => res.text())
@@ -21,7 +23,7 @@ function moreInfos() {
         const infoDiv = document.createElement('div');
         infoDiv.style.display = 'flex';
         infoDiv.style.flexFlow = 'column nowrap';
-        infoDiv.style.margin = '1em 0';
+        infoDiv.style.margin = '.5em 0';
         infoDiv.style.color = '#993322';
 
         if (window.location.href.indexOf('elevage/chevaux/?elevage') > -1) {
@@ -31,14 +33,16 @@ function moreInfos() {
             infoDiv.innerHTML += '<span><span style="font-weight: bold;">Blup: </span>' + blupFloat[0] + '</span>';
           }
 
-          const PGHtml = data.match(regexpPGHtml);
-          if (PGHtml) {
-            const PGFloat = PGHtml[0].match(regexpFloat);
-            infoDiv.innerHTML += `<span><span style="font-weight: bold;">${isFrenchApp ? 'PG: ' : 'GP: '}</span>${PGFloat[0]}</span>`;
+          if (!isDetailedView) {
+            const PGHtml = data.match(regexpPGHtml);
+            if (PGHtml) {
+              const PGFloat = PGHtml[0].match(regexpFloat);
+              infoDiv.innerHTML += `<span><span style="font-weight: bold;">${isFrenchApp ? 'PG: ' : 'GP: '}</span>${PGFloat[0]}</span>`;
+            }
           }
         }
 
-        if (window.location.href.indexOf('elevage/chevaux/?elevage') > -1 || window.location.href.indexOf('centre/box') > -1) {
+        if (window.location.href.indexOf('elevage/chevaux/?elevage') > -1 && !isDetailedView || window.location.href.indexOf('centre/box') > -1) {
           const skillsHtml = data.match(regexpSkillsHtml);
           if (skillsHtml) {
             const skillsFloat = skillsHtml[0].match(regexpFloat);
@@ -65,4 +69,4 @@ Array.from(breedingsBtn).forEach((breedingBtn) => {
 
 setTimeout(() => {
   moreInfos();
-}, 50);
+}, 250);
