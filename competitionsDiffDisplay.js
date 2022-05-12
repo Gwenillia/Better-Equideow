@@ -46,7 +46,7 @@ function competitionsDiffDisplay() {
     return x.join(',').replace(/[^0-9\.,]/g, '').split(',').map((i) => Number(i));
   }
 
-  if (!bonusHtml.outerHTML.match(/(Ce cheval n'a aucun bonus.|This horse doesn't have any bonuses.)/)) {
+  if (!bonusHtml.outerHTML.match(/(Ce cheval n'a aucun bonus.|This horse doesn't have any bonuses.|Cette jument n'a aucun bonus.|This mare doesn't have any bonuses.)/)) {
       const staminaBonuses = bonusHtml.outerHTML.match(/(endurance|stamina).+?[1-9]\d*/g);
       const staminaBonusesValues = convert(staminaBonuses);
 
