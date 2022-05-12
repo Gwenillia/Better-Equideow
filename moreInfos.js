@@ -62,11 +62,10 @@ function moreInfos() {
           let br;
           if (name.parentNode.children.length === 5) {
             br = name.parentNode.children[3];
-            br && name.parentNode.removeChild(br);
           } else {
             br = name.parentNode.children[2];
-            br && name.parentNode.removeChild(br);
           }
+          br && name.parentNode.removeChild(br);
         }
       });
   });
