@@ -23,7 +23,7 @@ function moreInfos() {
         const infoDiv = document.createElement('div');
         infoDiv.style.display = 'flex';
         infoDiv.style.flexFlow = 'column nowrap';
-        infoDiv.style.margin = '.5em 0';
+        infoDiv.style.margin = '.25em 0';
         infoDiv.style.color = '#993322';
 
         if (window.location.href.indexOf('elevage/chevaux/?elevage') > -1 || window.location.href.indexOf('marche/vente') > -1) {
@@ -58,10 +58,15 @@ function moreInfos() {
 
         if (locationAllowed) {
           name.parentNode.insertBefore(infoDiv, name.nextSibling);
+          console.log(name.parentNode.children.length);
+          let br;
+          if (name.parentNode.children.length === 5) {
+            br = name.parentNode.children[3];
+          } else {
+            br = name.parentNode.children[2];
+          }
+          br && name.parentNode.removeChild(br);
         }
-        const br = name.parentNode.children[2];
-        br && name.parentNode.removeChild(br);
-
       });
   });
 }
