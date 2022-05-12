@@ -1,12 +1,10 @@
-# Better-Equideow
-Small chrome extension for Howrse
+# Better Equideow
+Extension chrome pour Equideow qui permet d'obtenir plus facilement les différentes informations du jeux comme le blup, le PG, les compétences mais aussi d'afficher un coefficient de victoire pour mieux gérer ses blups notamment
 
-Allow you to get more informations about blup and skills from your breeding farm or EC box page.
+---
+## Better Howrse
+Small chrome extension for Howrse that allow you to get more informations about your horses and competition difficulties.
 
 ---
 
-Extension chrome pour equideow qui permet d'obtenir le blup de chaque chevaux directement depuis la page d'élevage. Permet également de voir les compétances des chevaux présents dans les box directement depuis la page box.
-
----
-
-DL : incoming
+### DL : incoming

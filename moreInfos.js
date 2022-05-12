@@ -50,9 +50,11 @@ function moreInfos() {
             infoDiv.innerHTML += `<span><span style="font-weight: bold;">${isFrenchApp ? 'Compétences: ' : 'Skills: '}</span>${skillsFloat[0]}</span>`;
           }
         }
+
         name.parentNode.insertBefore(infoDiv, name.nextSibling);
         const br = name.parentNode.children[2];
-        name.parentNode.removeChild(br);
+        br && name.parentNode.removeChild(br);
+        
       });
   });
 }
