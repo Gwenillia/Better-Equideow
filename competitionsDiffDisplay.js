@@ -6,13 +6,22 @@ function competitionsDiffDisplay() {
     isFrenchApp = true;
   }
 
+  const parser = new DOMParser();
+
   const competitionsHTML = document.getElementById('competition-body-content');
   const competitionTitle = document.getElementById('competition-head-title');
   const competitions = competitionsHTML.querySelectorAll('a');
 
   competitionTitle.style.display = 'flex';
   competitionTitle.style.flexFlow = 'column nowrap';
-  competitionTitle.innerHTML += `<span style="font-size: .8em;">${isFrenchApp ? 'Plus le coeff est élevé plus il y a de chances de gagner' : 'The higher the coefficient, the greater the chance of winning'}</span>`;
+  const hintHTML = `<span style="font-size: .8em;">${isFrenchApp ? 'Plus le coeff est élevé plus il y a de chances de gagner' : 'The higher the coefficient, the greater the chance of winning'}</span>`;
+  const parsedHintHtml = parser.parseFromString(hintHTML, `text/html`);
+  const hintTags = parsedHintHtml.getElementsByTagName(`span`);
+
+  for (const tag of hintTags) {
+    competitionTitle.appendChild(tag);
+  }
+
 
   const characteristics = document.getElementById('characteristics-body-content');
   const ageStr = characteristics.getElementsByClassName('align-right')[0].textContent;
@@ -47,37 +56,37 @@ function competitionsDiffDisplay() {
   }
 
   if (!bonusHtml.outerHTML.match(/(Ce cheval n'a aucun bonus.|This horse doesn't have any bonuses.|Cette jument n'a aucun bonus.|This mare doesn't have any bonuses.)/)) {
-      const staminaBonuses = bonusHtml.outerHTML.match(/(endurance|stamina).+?[1-9]\d*/g);
-      const staminaBonusesValues = convert(staminaBonuses);
+    const staminaBonuses = bonusHtml.outerHTML.match(/(endurance|stamina).+?[1-9]\d*/g);
+    const staminaBonusesValues = convert(staminaBonuses);
 
 
-      const speedBonuses = bonusHtml.outerHTML.match(/(vitesse|speed).+?[1-9]\d*/g);
-      const speedBonusesValues = convert(speedBonuses);
+    const speedBonuses = bonusHtml.outerHTML.match(/(vitesse|speed).+?[1-9]\d*/g);
+    const speedBonusesValues = convert(speedBonuses);
 
 
-      const dressageBonuses = bonusHtml.outerHTML.match(/dressage.+?[1-9]\d*/g);
-      const dressageBonusesValues = convert(dressageBonuses);
+    const dressageBonuses = bonusHtml.outerHTML.match(/dressage.+?[1-9]\d*/g);
+    const dressageBonusesValues = convert(dressageBonuses);
 
 
-      const gallopBonuses = bonusHtml.outerHTML.match(/(galop|gallop).+?[1-9]\d*/g);
-      const gallopBonusesValues = convert(gallopBonuses);
+    const gallopBonuses = bonusHtml.outerHTML.match(/(galop|gallop).+?[1-9]\d*/g);
+    const gallopBonusesValues = convert(gallopBonuses);
 
-      const trotBonuses = bonusHtml.outerHTML.match(/trot.+?[1-9]\d*/g);
-      const trotBonusesValues = convert(trotBonuses);
+    const trotBonuses = bonusHtml.outerHTML.match(/trot.+?[1-9]\d*/g);
+    const trotBonusesValues = convert(trotBonuses);
 
 
-      const jumpingBonuses = bonusHtml.outerHTML.match(/(saut|jumping).+?[1-9]\d*/g);
-      const jumpingBonusesValues = convert(jumpingBonuses);
+    const jumpingBonuses = bonusHtml.outerHTML.match(/(saut|jumping).+?[1-9]\d*/g);
+    const jumpingBonusesValues = convert(jumpingBonuses);
 
-      // all bonuses
-      const reducer = (a, b) => a + b;
+    // all bonuses
+    const reducer = (a, b) => a + b;
 
-      staminaTotalBonusValue = staminaBonusesValues.reduce(reducer);
-      speedTotalBonusValue = speedBonusesValues.reduce(reducer);
-      dressageTotalBonusValue = dressageBonusesValues.reduce(reducer);
-      gallopTotalBonusValue = gallopBonusesValues.reduce(reducer);
-      trotTotalBonusValue = trotBonusesValues.reduce(reducer);
-      jumpingTotalBonusValue = jumpingBonusesValues.reduce(reducer);
+    staminaTotalBonusValue = staminaBonusesValues.reduce(reducer);
+    speedTotalBonusValue = speedBonusesValues.reduce(reducer);
+    dressageTotalBonusValue = dressageBonusesValues.reduce(reducer);
+    gallopTotalBonusValue = gallopBonusesValues.reduce(reducer);
+    trotTotalBonusValue = trotBonusesValues.reduce(reducer);
+    jumpingTotalBonusValue = jumpingBonusesValues.reduce(reducer);
   }
 
   competitions.forEach((competition) => {
@@ -87,63 +96,63 @@ function competitionsDiffDisplay() {
 
     let points;
     let coeff;
+    let diffDivHTML;
 
     switch (competition.innerText) {
       case 'Trot':
         points = (trot + trotTotalBonusValue) * 0.45 + (speed + speedTotalBonusValue) * 0.3 + (dressage + dressageTotalBonusValue) * 0.2 + age * 0.05;
         coeff = points / trot;
-        diffDiv.innerHTML += `<span><span style="font-weight: bold;">Coeff: </span>${coeff.toFixed(2)}</span>`;
         break;
       case 'Galop':
       case 'Gallop':
         points = (gallop + gallopTotalBonusValue) * 0.45 + (speed + speedTotalBonusValue) * 0.3 + (dressage + dressageTotalBonusValue) * 0.2 + age * 0.05;
         coeff = points / gallop;
-        diffDiv.innerHTML += `<span><span style="font-weight: bold;">Coeff: </span>${coeff.toFixed(2)}</span>`;
         break;
       case 'Dressage':
         points = (dressage + dressageTotalBonusValue) * 0.45 + (trot + trotTotalBonusValue) * 0.3 + (gallop + gallopTotalBonusValue) * 0.2 + age * 0.05;
         coeff = points / dressage;
-        diffDiv.innerHTML += `<span><span style="font-weight: bold;">Coeff: </span>${coeff.toFixed(2)}</span>`;
         break;
       case 'Cross':
       case 'Cross-country':
         points = (stamina + staminaTotalBonusValue) * 0.45 + (dressage + dressageTotalBonusValue) * 0.3 + (jumping + jumpingTotalBonusValue) * 0.2 + age * 0.05;
         coeff = points / stamina;
-        diffDiv.innerHTML += `<span><span style="font-weight: bold;">Coeff: </span>${coeff.toFixed(2)}</span>`;
         break;
       case 'Cso':
       case 'Show jumping':
         points = (jumping + jumpingTotalBonusValue) * 0.45 + (dressage + dressageTotalBonusValue) * 0.3 + (speed + speedTotalBonusValue) * 0.2 + age * 0.05;
         coeff = points / jumping;
-        diffDiv.innerHTML += `<span><span style="font-weight: bold;">Coeff: </span>${coeff.toFixed(2)}</span>`;
         break;
       case 'Barrel racing':
         points = (speed + speedTotalBonusValue) * 0.45 + (stamina + staminaTotalBonusValue) * 0.3 + (gallop + gallopTotalBonusValue) * 0.2 + age * 0.05;
         coeff = points / speed;
-        diffDiv.innerHTML += `<span><span style="font-weight: bold;">Coeff: </span>${coeff.toFixed(2)}</span>`;
         break;
       case 'Cutting':
         points = (stamina + staminaTotalBonusValue) * 0.45 + (dressage + dressageTotalBonusValue) * 0.3 + (speed + speedTotalBonusValue) * 0.2 + age * 0.05;
         coeff = points / stamina;
-        diffDiv.innerHTML += `<span><span style="font-weight: bold;">Coeff: </span>${coeff.toFixed(2)}</span>`;
         break;
       case 'Trail class':
         points = (dressage + dressageTotalBonusValue) * 0.45 + (trot + trotTotalBonusValue) * 0.3 + (jumping + jumpingTotalBonusValue) * 0.2 + age * 0.05;
         coeff = points / dressage;
-        diffDiv.innerHTML += `<span><span style="font-weight: bold;">Coeff: </span>${coeff.toFixed(2)}</span>`;
         break;
       case 'Reining':
         points = (gallop + gallopTotalBonusValue) * 0.45 + (dressage + dressageTotalBonusValue) * 0.3 + (stamina + staminaTotalBonusValue) * 0.2 + age * 0.05;
         coeff = points / gallop;
-        diffDiv.innerHTML += `<span><span style="font-weight: bold;">Coeff: </span>${coeff.toFixed(2)}</span>`;
         break;
       case 'Western pleasure':
         points = (trot + trotTotalBonusValue) * 0.45 + (stamina + staminaTotalBonusValue) * 0.3 + (dressage + dressageTotalBonusValue) * 0.2 + age * 0.05;
         coeff = points / trot;
-        diffDiv.innerHTML += `<span><span style="font-weight: bold;">Coeff: </span>${coeff.toFixed(2)}</span>`;
         break;
     }
 
+    if (coeff) {
+      diffDivHTML = `<span><span style="font-weight: bold;">Coeff: </span>${coeff.toFixed(2)}</span>`;
+    }
+    const parsedDiffDivHTML = parser.parseFromString(diffDivHTML, `text/html`);
+    const diffDivTags = parsedDiffDivHTML.getElementsByTagName(`span`);
+
+    for (const tag of diffDivTags) {
+      diffDiv.appendChild(tag);
+    }
     competition.parentNode.insertBefore(diffDiv, competition.nextSibling);
   });
 }

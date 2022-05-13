@@ -6,5 +6,9 @@ Extension chrome pour Equideow qui permet d'obtenir plus facilement les différe
 Small chrome extension for Howrse that allow you to get more informations about your horses and competition difficulties.
 
 ---
-
-### DL : incoming
+![Version](https://img.shields.io/badge/version-1.2.5-informational)
+[![DeepScan grade](https://deepscan.io/api/teams/17688/projects/21040/branches/592899/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=17688&pid=21040&bid=592899)
+<br>
+![Chrome Web Store](https://img.shields.io/badge/chrome-soon-informational)
+<br>
+![Mozilla](https://img.shields.io/badge/mozilla-soon-informational)
