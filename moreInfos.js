@@ -10,16 +10,35 @@ function moreInfos() {
 
   let isFrenchApp;
 
+  const parser = new DOMParser();
+
   if (window.location.host.match(/.+equideow.+/)) {
     isFrenchApp = true;
   }
 
   const isDetailedView = document.getElementById('detail-chevaux');
 
+  let locationAllowed;
+  if (window.location.href.indexOf('elevage/chevaux/?elevage') > -1 || window.location.href.indexOf('marche/vente') > -1 || window.location.href.indexOf('centre/box') > -1) {
+    locationAllowed = true;
+  }
+
+  function parseHTML(infoDiv, html) {
+
+    const parsedInfoDivHTML = parser.parseFromString(html, `text/html`);
+    const infoDivTags = parsedInfoDivHTML.getElementsByTagName(`span`);
+
+    for (const tag of infoDivTags) {
+      infoDiv.appendChild(tag);
+    }
+  }
+
+
   namesArr.forEach((name) => {
     fetch(name.href)
       .then((res) => res.text())
       .then((data) => {
+
         const infoDiv = document.createElement('div');
         infoDiv.style.display = 'flex';
         infoDiv.style.flexFlow = 'column nowrap';
@@ -30,15 +49,14 @@ function moreInfos() {
           const blupHtml = data.match(regexpBlupHtml);
           if (blupHtml) {
             const blupFloat = blupHtml[0].match(regexpFloat);
-            infoDiv.innerHTML += '<span><span style="font-weight: bold;">Blup: </span>' + blupFloat[0] + '</span>';
+            parseHTML(infoDiv, '<span><span style="font-weight: bold;">Blup: </span>' + blupFloat[0] + '</span>');
           }
 
           if (!isDetailedView && !(window.location.href.indexOf('marche/vente') > -1)) {
             const PGHtml = data.match(regexpPGHtml);
-            console.log(!(window.location.href.indexOf('marche/vente') > -1));
             if (PGHtml) {
               const PGFloat = PGHtml[0].match(regexpFloat);
-              infoDiv.innerHTML += `<span><span style="font-weight: bold;">${isFrenchApp ? 'PG: ' : 'GP: '}</span>${PGFloat[0]}</span>`;
+              parseHTML(infoDiv, `<span><span style="font-weight: bold;">${isFrenchApp ? 'PG: ' : 'GP: '}</span>${PGFloat[0]}</span>`);
             }
           }
         }
@@ -47,18 +65,12 @@ function moreInfos() {
           const skillsHtml = data.match(regexpSkillsHtml);
           if (skillsHtml) {
             const skillsFloat = skillsHtml[0].match(regexpFloat);
-            infoDiv.innerHTML += `<span><span style="font-weight: bold;">${isFrenchApp ? 'Compétences: ' : 'Skills: '}</span>${skillsFloat[0]}</span>`;
+            parseHTML(infoDiv,`<span><span style="font-weight: bold;">${isFrenchApp ? 'Compétences: ' : 'Skills: '}</span>${skillsFloat[0]}</span>`);
           }
-        }
-
-        let locationAllowed;
-        if (window.location.href.indexOf('elevage/chevaux/?elevage') > -1 || window.location.href.indexOf('marche/vente') > -1 || window.location.href.indexOf('centre/box') > -1) {
-          locationAllowed = true;
         }
 
         if (locationAllowed) {
           name.parentNode.insertBefore(infoDiv, name.nextSibling);
-          console.log(name.parentNode.children.length);
           let br;
           if (name.parentNode.children.length === 5) {
             br = name.parentNode.children[3];
