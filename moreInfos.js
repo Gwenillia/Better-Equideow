@@ -14,6 +14,8 @@ function moreInfos() {
     isFrenchApp = true;
   }
 
+  const isDetailedView = document.getElementById('detail-chevaux');
+
   namesArr.forEach((name) => {
     fetch(name.href)
       .then((res) => res.text())
@@ -21,24 +23,27 @@ function moreInfos() {
         const infoDiv = document.createElement('div');
         infoDiv.style.display = 'flex';
         infoDiv.style.flexFlow = 'column nowrap';
-        infoDiv.style.margin = '1em 0';
+        infoDiv.style.margin = '.25em 0';
         infoDiv.style.color = '#993322';
 
-        if (window.location.href.indexOf('elevage/chevaux/?elevage') > -1) {
+        if (window.location.href.indexOf('elevage/chevaux/?elevage') > -1 || window.location.href.indexOf('marche/vente') > -1) {
           const blupHtml = data.match(regexpBlupHtml);
           if (blupHtml) {
             const blupFloat = blupHtml[0].match(regexpFloat);
             infoDiv.innerHTML += '<span><span style="font-weight: bold;">Blup: </span>' + blupFloat[0] + '</span>';
           }
 
-          const PGHtml = data.match(regexpPGHtml);
-          if (PGHtml) {
-            const PGFloat = PGHtml[0].match(regexpFloat);
-            infoDiv.innerHTML += `<span><span style="font-weight: bold;">${isFrenchApp ? 'PG: ' : 'GP: '}</span>${PGFloat[0]}</span>`;
+          if (!isDetailedView && !(window.location.href.indexOf('marche/vente') > -1)) {
+            const PGHtml = data.match(regexpPGHtml);
+            console.log(!(window.location.href.indexOf('marche/vente') > -1));
+            if (PGHtml) {
+              const PGFloat = PGHtml[0].match(regexpFloat);
+              infoDiv.innerHTML += `<span><span style="font-weight: bold;">${isFrenchApp ? 'PG: ' : 'GP: '}</span>${PGFloat[0]}</span>`;
+            }
           }
         }
 
-        if (window.location.href.indexOf('elevage/chevaux/?elevage') > -1 || window.location.href.indexOf('centre/box') > -1) {
+        if (window.location.href.indexOf('elevage/chevaux/?elevage') > -1 && !isDetailedView || window.location.href.indexOf('centre/box') > -1) {
           const skillsHtml = data.match(regexpSkillsHtml);
           if (skillsHtml) {
             const skillsFloat = skillsHtml[0].match(regexpFloat);
@@ -46,8 +51,21 @@ function moreInfos() {
           }
         }
 
-        if (window.location.href.indexOf('elevage/chevaux/?elevage') > -1 || window.location.href.indexOf('centre/box') > -1) {
+        let locationAllowed;
+        if (window.location.href.indexOf('elevage/chevaux/?elevage') > -1 || window.location.href.indexOf('marche/vente') > -1 || window.location.href.indexOf('centre/box') > -1) {
+          locationAllowed = true;
+        }
+
+        if (locationAllowed) {
           name.parentNode.insertBefore(infoDiv, name.nextSibling);
+          console.log(name.parentNode.children.length);
+          let br;
+          if (name.parentNode.children.length === 5) {
+            br = name.parentNode.children[3];
+          } else {
+            br = name.parentNode.children[2];
+          }
+          br && name.parentNode.removeChild(br);
         }
       });
   });
@@ -65,4 +83,4 @@ Array.from(breedingsBtn).forEach((breedingBtn) => {
 
 setTimeout(() => {
   moreInfos();
-}, 50);
+}, 250);

@@ -4,7 +4,7 @@
     "description": "Name of the extension."
   },
   "appDesc": {
-    "message": "This extension displays more informations in the game like blup in BF or Skills in EC to make you feel more comfortable when looking for specific horses.",
+    "message": "This extension displays more informations in the game about horses and competitions to make you feel more comfortable when playing.",
     "description": "Description of the extension."
   }
 }
