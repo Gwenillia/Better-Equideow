@@ -1,38 +1,29 @@
+const regexpBlupHtml = /<td class="last align-right" width="15%" dir="ltr"><strong class="nowrap">[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?<\/strong><\/td>/;
+const regexpPGHtml = /<strong>Total.+[+-]?(?=\d*[.eE])(?=\.?\d)\d*\.?\d*(?:[eE][+-]?\d+)?<\/strong>/;
+const regexpSkillsHtml = /<span id="competencesValeur">[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?<\/span>/;
+
+const regexpFloat = /[+-]?(?=\d*[.eE])(?=\.?\d)\d*\.?\d*(?:[eE][+-]?\d+)?/;
+
+
+function parseHTML(infoDiv, html) {
+
+  const parsedInfoDivHTML = parser.parseFromString(html, `text/html`);
+  const infoDivTags = parsedInfoDivHTML.getElementsByTagName(`span`);
+
+  for (const tag of infoDivTags) {
+    infoDiv.appendChild(tag);
+  }
+}
+
+let locationAllowed;
+if (window.location.href.indexOf('elevage/chevaux/?elevage') > -1 || window.location.href.indexOf('marche/vente') > -1 || window.location.href.indexOf('centre/box') > -1) {
+  locationAllowed = true;
+}
+
 function moreInfos() {
+  const isDetailedView = document.getElementById('detail-chevaux');
   const names = document.getElementsByClassName('horsename');
   const namesArr = Array.from(names);
-
-  const regexpBlupHtml = /<td class="last align-right" width="15%" dir="ltr"><strong class="nowrap">[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?<\/strong><\/td>/;
-  const regexpPGHtml = /<strong>Total.+[+-]?(?=\d*[.eE])(?=\.?\d)\d*\.?\d*(?:[eE][+-]?\d+)?<\/strong>/;
-  const regexpSkillsHtml = /<span id="competencesValeur">[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?<\/span>/;
-
-  const regexpFloat = /[+-]?(?=\d*[.eE])(?=\.?\d)\d*\.?\d*(?:[eE][+-]?\d+)?/;
-
-  let isFrenchApp;
-
-  const parser = new DOMParser();
-
-  if (window.location.host.match(/.+equideow.+/)) {
-    isFrenchApp = true;
-  }
-
-  const isDetailedView = document.getElementById('detail-chevaux');
-
-  let locationAllowed;
-  if (window.location.href.indexOf('elevage/chevaux/?elevage') > -1 || window.location.href.indexOf('marche/vente') > -1 || window.location.href.indexOf('centre/box') > -1) {
-    locationAllowed = true;
-  }
-
-  function parseHTML(infoDiv, html) {
-
-    const parsedInfoDivHTML = parser.parseFromString(html, `text/html`);
-    const infoDivTags = parsedInfoDivHTML.getElementsByTagName(`span`);
-
-    for (const tag of infoDivTags) {
-      infoDiv.appendChild(tag);
-    }
-  }
-
 
   namesArr.forEach((name) => {
     fetch(name.href)
