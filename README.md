@@ -18,3 +18,5 @@ your horses and competition difficulties.
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/gkopbgamdhaolbjalfcbmbjkjcmgffjp)](https://chrome.google.com/webstore/detail/better-equideow/gkopbgamdhaolbjalfcbmbjkjcmgffjp)
 <br>
 [![Mozilla Add-on](https://img.shields.io/amo/v/better-equideow)](https://addons.mozilla.org/fr/firefox/addon/better-equideow/)
+<br>
+[![Edge Add-on](https://img.shields.io/badge/dynamic/json?label=edge%20add-on&prefix=v&query=%24.version&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Finmcglblgnoceekbpkheihppombhdenf)](https://microsoftedge.microsoft.com/addons/detail/arxivutils/inmcglblgnoceekbpkheihppombhdenf)
