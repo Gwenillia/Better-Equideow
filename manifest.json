@@ -2,7 +2,7 @@
   "name": "__MSG_appName__",
   "description": "__MSG_appDesc__",
   "default_locale": "fr",
-  "version": "1.2.4",
+  "version": "1.2.6",
   "manifest_version": 3,
   "author": "TC-Dev",
   "icons": {
@@ -13,9 +13,15 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.equideow.com/*", "*://*.howrse.com/*"],
+      "matches": [
+        "*://*.equideow.com/*",
+        "*://*.howrse.com/*"
+      ],
       "run_at": "document_idle",
-      "js": ["moreInfos.js", "competitionsDiffDisplay.js"]
+      "js": [
+        "moreInfos.js",
+        "competitionsDiffDisplay.js"
+      ]
     }
   ]
 }
