@@ -13,9 +13,15 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.equideow.com/*", "*://*.howrse.com/*"],
+      "matches": [
+        "*://*.equideow.com/*",
+        "*://*.howrse.com/*"
+      ],
       "run_at": "document_idle",
-      "js": ["moreInfos.js", "competitionsDiffDisplay.js"]
+      "js": [
+        "moreInfos.js",
+        "competitionsDiffDisplay.js"
+      ]
     }
   ]
 }

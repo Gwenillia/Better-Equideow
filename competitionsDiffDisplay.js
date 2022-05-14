@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2022. Gwen Tripet-Costet
+ * This file is part of Better Equideow (Better Howrse).
+ * Better Equideow is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ * Better Equideow (Better Howrse) is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 let isFrenchApp;
 
 if (window.location.host.match(/.+equideow.+/)) {
@@ -43,7 +51,6 @@ function competitionsDiffDisplay() {
   const jumping = parseFloat(document.getElementById('sautValeur').innerText);
 
   const bonusHtml = document.getElementById('bonuses-body-content');
-
 
 
   if (!bonusHtml.outerHTML.match(/(Ce cheval n'a aucun bonus.|This horse doesn't have any bonuses.|Cette jument n'a aucun bonus.|This mare doesn't have any bonuses.)/)) {
