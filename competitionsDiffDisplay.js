@@ -34,12 +34,18 @@ function competitionsDiffDisplay() {
   const characteristics = document.getElementById('characteristics-body-content');
   const ageStr = characteristics.getElementsByClassName('align-right')[0].textContent;
   const ageStrArr = ageStr.match(/[1-9]\d*/g);
-  const ageIntArr = ageStrArr.map((i) => Number(i));
+  let ageIntArr;
+
+  if (ageStrArr) {
+    ageIntArr = ageStrArr.map((i) => Number(i));
+  } else return;
 
   if (ageIntArr.length > 1) {
     age = ageIntArr[0] * 12 + ageIntArr[1];
-  } else {
+  } else if (ageIntArr.length === 1) {
     age = ageIntArr[0] * 12;
+  } else {
+    return;
   }
 
   const stamina = parseFloat(document.getElementById('enduranceValeur').innerText);
