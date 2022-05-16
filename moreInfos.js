@@ -33,7 +33,6 @@ function querySelectorAllLive(el, selector) {
 const parser = new DOMParser();
 
 function parseHTML(targetDiv, html, selector) {
-
   const parsedTargetDivHTML = parser.parseFromString(html, `text/html`);
   const targetDivTags = querySelectorAllLive(parsedTargetDivHTML, selector);
 
@@ -60,7 +59,6 @@ function moreInfos() {
     fetch(name.href)
       .then((res) => res.text())
       .then((data) => {
-
         const infoDiv = document.createElement('div');
         infoDiv.style.display = 'flex';
         infoDiv.style.flexFlow = 'column nowrap';
@@ -93,13 +91,10 @@ function moreInfos() {
 
         if (locationAllowed) {
           name.parentNode.insertBefore(infoDiv, name.nextSibling);
-          let br;
-          if (name.parentNode.children.length === 5) {
-            br = name.parentNode.children[3];
-          } else {
-            br = name.parentNode.children[2];
-          }
-          br && name.parentNode.removeChild(br);
+
+          // remvoe <br> element before affixes in some views (cf: detailed view in breeding)
+          const br = name.parentNode.querySelector('br');
+          br && br.remove();
         }
       });
   });
