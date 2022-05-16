@@ -12,7 +12,6 @@ if (window.location.host.match(/.+equideow.+/)) {
   isFrenchApp = true;
 }
 
-const parser = new DOMParser();
 const reducer = (a, b) => a + b;
 
 let age;
@@ -99,7 +98,7 @@ function competitionsDiffDisplay() {
 
   competitionTitle.style.display = 'flex';
   competitionTitle.style.flexFlow = 'column nowrap';
-  const hintHTML = `<span style="font-size: .8em;">${isFrenchApp ? 'Plus le coeff est élevé plus il y a de chances de gagner' : 'The higher the coefficient, the greater the chance of winning'}</span>`;
+  const hintHTML = `<span style='font-size: .8em;'>${isFrenchApp ? 'Plus le coeff est élevé plus il y a de chances de gagner' : 'The higher the coefficient, the greater the chance of winning'}</span>`;
   const parsedHintHtml = parser.parseFromString(hintHTML, `text/html`);
   const hintTags = parsedHintHtml.getElementsByTagName(`span`);
 
@@ -151,7 +150,7 @@ function competitionsDiffDisplay() {
     }
 
     if (coeff) {
-      const diffDivHTML = `<span><span style="font-weight: bold;">Coeff: </span>${coeff.toFixed(2)}</span>`;
+      const diffDivHTML = `<span><span style='font-weight: bold;'>Coeff: </span>${coeff.toFixed(2)}</span>`;
 
       const parsedDiffDivHTML = parser.parseFromString(diffDivHTML, `text/html`);
       const diffDivTags = parsedDiffDivHTML.getElementsByTagName(`span`);

@@ -12,19 +12,42 @@ const regexpSkillsHtml = /<span id="competencesValeur">[-+]?[0-9]*\.?[0-9]+([eE]
 
 const regexpFloat = /[+-]?(?=\d*[.eE])(?=\.?\d)\d*\.?\d*(?:[eE][+-]?\d+)?/;
 
+function querySelectorAllLive(el, selector) {
+  const result = Array.prototype.slice.call(el.querySelectorAll(selector));
 
-function parseHTML(infoDiv, html) {
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      [].forEach.call(mutation.addedNodes, (node) => {
+        if (node.nodeType === NODE.ELEMENT_NODE && node.matches(selector)) {
+          result.push(node);
+        }
+      });
+    });
+  });
 
-  const parsedInfoDivHTML = parser.parseFromString(html, `text/html`);
-  const infoDivTags = parsedInfoDivHTML.getElementsByTagName(`span`);
+  observer.observe(el, { childList: true, subtree: true });
 
-  for (const tag of infoDivTags) {
-    infoDiv.appendChild(tag);
+  return result;
+}
+
+const parser = new DOMParser();
+
+function parseHTML(targetDiv, html, selector) {
+
+  const parsedTargetDivHTML = parser.parseFromString(html, `text/html`);
+  const targetDivTags = querySelectorAllLive(parsedTargetDivHTML, selector);
+
+  for (const tag of targetDivTags) {
+    targetDiv.appendChild(tag);
   }
 }
 
+const elevageLocation = window.location.href.indexOf('elevage/chevaux/?elevage') > -1;
+const sellsLocation = window.location.href.indexOf('marche/vente') > -1;
+const boxesLocation = window.location.href.indexOf('centre/box') > -1;
+
 let locationAllowed;
-if (window.location.href.indexOf('elevage/chevaux/?elevage') > -1 || window.location.href.indexOf('marche/vente') > -1 || window.location.href.indexOf('centre/box') > -1) {
+if (elevageLocation || sellsLocation || boxesLocation) {
   locationAllowed = true;
 }
 
@@ -44,18 +67,18 @@ function moreInfos() {
         infoDiv.style.margin = '.25em 0';
         infoDiv.style.color = '#993322';
 
-        if (window.location.href.indexOf('elevage/chevaux/?elevage') > -1 || window.location.href.indexOf('marche/vente') > -1) {
+        if (elevageLocation || sellsLocation) {
           const blupHtml = data.match(regexpBlupHtml);
           if (blupHtml) {
             const blupFloat = blupHtml[0].match(regexpFloat);
-            parseHTML(infoDiv, '<span><span style="font-weight: bold;">Blup: </span>' + blupFloat[0] + '</span>');
+            parseHTML(infoDiv, '<p><span style="font-weight: bold;">Blup: </span>' + blupFloat[0] + '</p>', 'p');
           }
 
           if (!isDetailedView && !(window.location.href.indexOf('marche/vente') > -1)) {
             const PGHtml = data.match(regexpPGHtml);
             if (PGHtml) {
               const PGFloat = PGHtml[0].match(regexpFloat);
-              parseHTML(infoDiv, `<span><span style="font-weight: bold;">${isFrenchApp ? 'PG: ' : 'GP: '}</span>${PGFloat[0]}</span>`);
+              parseHTML(infoDiv, `<p><span style='font-weight: bold;'>${isFrenchApp ? 'PG: ' : 'GP: '}</span>${PGFloat[0]}</p>`, 'p');
             }
           }
         }
@@ -64,7 +87,7 @@ function moreInfos() {
           const skillsHtml = data.match(regexpSkillsHtml);
           if (skillsHtml) {
             const skillsFloat = skillsHtml[0].match(regexpFloat);
-            parseHTML(infoDiv, `<span><span style="font-weight: bold;">${isFrenchApp ? 'Compétences: ' : 'Skills: '}</span>${skillsFloat[0]}</span>`);
+            parseHTML(infoDiv, `<p><span style='font-weight: bold;'>${isFrenchApp ? 'Compétences: ' : 'Skills: '}</span>${skillsFloat[0]}</p>`, 'p');
           }
         }
 
