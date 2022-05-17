@@ -9,7 +9,7 @@ Small chrome extension for Howrse that allow you to get more informations about
 your horses and competition difficulties.
 
 ---
-[![Last Version](https://img.shields.io/badge/last%20version-v1.2.6-informational)](#)
+[![Last Version](https://img.shields.io/badge/last%20version-v1.3.0-informational)](#)
 [![DeepScan grade](https://deepscan.io/api/teams/17688/projects/21040/branches/592899/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=17688&pid=21040&bid=592899)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/Gwenillia/Better-Equideow.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Gwenillia/Better-Equideow/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/Gwenillia/Better-Equideow.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Gwenillia/Better-Equideow/context:javascript)
