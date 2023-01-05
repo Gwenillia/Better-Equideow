@@ -6,11 +6,17 @@
  * You should have received a copy of the GNU General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-const regexpBlupHtml = /<td class="last align-right" width="15%" dir="ltr"><strong class="nowrap">[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?<\/strong><\/td>/;
-const regexpPGHtml = /<strong>Total.+[+-]?(?=\d*[.eE])(?=\.?\d)\d*\.?\d*(?:[eE][+-]?\d+)?<\/strong>/;
-const regexpSkillsHtml = /<span id="competencesValeur">[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?<\/span>/;
+const regexpBlupHtml =
+  /<td class="last align-right" width="15%" dir="ltr"><strong class="nowrap">[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?<\/strong><\/td>/;
+const regexpPGHtml =
+  /<strong>Total.+[+-]?(?=\d*[.eE])(?=\.?\d)\d*\.?\d*(?:[eE][+-]?\d+)?<\/strong>/;
+const regexpSkillsHtml =
+  /<span id="competencesValeur">[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?<\/span>/;
+const regexpPetHtml =
+  /<h3 class="align-center module-style-6-title module-title">.*<\/h3>/;
 
 const regexpFloat = /[+-]?(?=\d*[.eE])(?=\.?\d)\d*\.?\d*(?:[eE][+-]?\d+)?/;
+const regexpValue = /\>(.*?)\</;
 
 function querySelectorAllLive(el, selector) {
   const result = Array.prototype.slice.call(el.querySelectorAll(selector));
@@ -41,9 +47,10 @@ function parseHTML(targetDiv, html, selector) {
   }
 }
 
-const elevageLocation = window.location.href.indexOf('elevage/chevaux/?elevage') > -1;
-const sellsLocation = window.location.href.indexOf('marche/vente') > -1;
-const boxesLocation = window.location.href.indexOf('centre/box') > -1;
+const elevageLocation =
+  window.location.href.indexOf("elevage/chevaux/?elevage") > -1;
+const sellsLocation = window.location.href.indexOf("marche/vente") > -1;
+const boxesLocation = window.location.href.indexOf("centre/box") > -1;
 
 let locationAllowed;
 if (elevageLocation || sellsLocation || boxesLocation) {
@@ -51,41 +58,78 @@ if (elevageLocation || sellsLocation || boxesLocation) {
 }
 
 function moreInfos() {
-  const isDetailedView = document.getElementById('detail-chevaux');
-  const names = document.getElementsByClassName('horsename');
+  const isDetailedView = document.getElementById("detail-chevaux");
+  const names = document.getElementsByClassName("horsename");
   const namesArr = Array.from(names);
 
   namesArr.forEach((name) => {
     fetch(name.href)
       .then((res) => res.text())
       .then((data) => {
-        const infoDiv = document.createElement('div');
-        infoDiv.style.display = 'flex';
-        infoDiv.style.flexFlow = 'column nowrap';
-        infoDiv.style.margin = '.25em 0';
-        infoDiv.style.color = '#993322';
+        const infoDiv = document.createElement("div");
+        infoDiv.style.display = "flex";
+        infoDiv.style.flexFlow = "column nowrap";
+        infoDiv.style.margin = ".25em 0";
+        infoDiv.style.color = "#993322";
 
         if (elevageLocation || sellsLocation) {
           const blupHtml = data.match(regexpBlupHtml);
+          const PetHtml = data.match(regexpPetHtml);
           if (blupHtml) {
             const blupFloat = blupHtml[0].match(regexpFloat);
-            parseHTML(infoDiv, '<p><span style="font-weight: bold;">Blup: </span>' + blupFloat[0] + '</p>', 'p');
+            parseHTML(
+              infoDiv,
+              '<p><span style="font-weight: bold;">Blup: </span>' +
+                blupFloat[0] +
+                "</p>",
+              "p"
+            );
+          }
+          if (PetHtml) {
+            const PetName = PetHtml[0].match(regexpValue);
+            console.log(PetName);
+            parseHTML(
+              infoDiv,
+              `<p><span style='font-weight: bold;'>${
+                isFrenchApp ? "Familier: " : "Pet: "
+              }</span>${PetName[1]}</p>`,
+              "p"
+            );
           }
 
-          if (!isDetailedView && !(window.location.href.indexOf('marche/vente') > -1)) {
+          if (
+            !isDetailedView &&
+            !(window.location.href.indexOf("marche/vente") > -1)
+          ) {
             const PGHtml = data.match(regexpPGHtml);
             if (PGHtml) {
               const PGFloat = PGHtml[0].match(regexpFloat);
-              parseHTML(infoDiv, `<p><span style='font-weight: bold;'>${isFrenchApp ? 'PG: ' : 'GP: '}</span>${PGFloat[0]}</p>`, 'p');
+              parseHTML(
+                infoDiv,
+                `<p><span style='font-weight: bold;'>${
+                  isFrenchApp ? "PG: " : "GP: "
+                }</span>${PGFloat[0]}</p>`,
+                "p"
+              );
             }
           }
         }
 
-        if (window.location.href.indexOf('elevage/chevaux/?elevage') > -1 && !isDetailedView || window.location.href.indexOf('centre/box') > -1) {
+        if (
+          (window.location.href.indexOf("elevage/chevaux/?elevage") > -1 &&
+            !isDetailedView) ||
+          window.location.href.indexOf("centre/box") > -1
+        ) {
           const skillsHtml = data.match(regexpSkillsHtml);
           if (skillsHtml) {
             const skillsFloat = skillsHtml[0].match(regexpFloat);
-            parseHTML(infoDiv, `<p><span style='font-weight: bold;'>${isFrenchApp ? 'Compétences: ' : 'Skills: '}</span>${skillsFloat[0]}</p>`, 'p');
+            parseHTML(
+              infoDiv,
+              `<p><span style='font-weight: bold;'>${
+                isFrenchApp ? "Compétences: " : "Skills: "
+              }</span>${skillsFloat[0]}</p>`,
+              "p"
+            );
           }
         }
 
@@ -93,17 +137,17 @@ function moreInfos() {
           name.parentNode.insertBefore(infoDiv, name.nextSibling);
 
           // remvoe <br> element before affixes in some views (cf: detailed view in breeding)
-          const br = name.parentNode.querySelector('br');
+          const br = name.parentNode.querySelector("br");
           br && br.remove();
         }
       });
   });
 }
 
-const breedingsBtn = document.getElementsByClassName('tab-action-select');
+const breedingsBtn = document.getElementsByClassName("tab-action-select");
 
 Array.from(breedingsBtn).forEach((breedingBtn) => {
-  breedingBtn.addEventListener('click', () => {
+  breedingBtn.addEventListener("click", () => {
     setTimeout(() => {
       moreInfos();
     }, 250);
