@@ -53,9 +53,11 @@ const elevageLocation =
   window.location.href.indexOf("elevage/chevaux/?elevage") > -1;
 const sellsLocation = window.location.href.indexOf("marche/vente") > -1;
 const boxesLocation = window.location.href.indexOf("centre/box") > -1;
+const communauteLocation =
+  window.location.href.indexOf("communaute/?type=tab-chevaux") > -1;
 
 let locationAllowed;
-if (elevageLocation || sellsLocation || boxesLocation) {
+if (elevageLocation || sellsLocation || boxesLocation || communauteLocation) {
   locationAllowed = true;
 }
 
@@ -74,7 +76,10 @@ function moreInfos() {
         infoDiv.style.margin = ".25em 0";
         infoDiv.style.color = "#993322";
 
-        if (elevageLocation || sellsLocation) {
+        console.log(communauteLocation);
+        //        if (elevageLocation || sellsLocation) {
+        if (!boxesLocation && locationAllowed) {
+          console.log("location not box");
           const blupHtml = data.match(regexpBlupHtml);
           const PetHtml =
             data.match(regexpPetHtmlOthers) || data.match(regexpPetHtmlSelf);
@@ -158,6 +163,15 @@ Array.from(breedingsBtn).forEach((breedingBtn) => {
     }, 250);
   });
 });
+
+setTimeout(() => {
+  const searchBtnCommunaute = document.querySelector("#searchHorseButton");
+  searchBtnCommunaute.addEventListener("click", () => {
+    setTimeout(() => {
+      moreInfos();
+    }, 250);
+  });
+}, 250);
 
 setTimeout(() => {
   moreInfos();
