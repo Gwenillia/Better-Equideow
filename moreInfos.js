@@ -20,20 +20,65 @@ const regexpPetHtmlSelf =
 const regexpFloat = /[+-]?(?=\d*[.eE])(?=\.?\d)\d*\.?\d*(?:[eE][+-]?\d+)?/;
 const regexpValue = /\>(.*?)\</;
 
+const loader = document.querySelector("#loading");
+// const tabChevaux = document.querySelector("#tab-chevaux"); cf: func detectSelectedTab
+
+/**
+ * Reload moreInfos function after #loading element is not displayed anymore (SPA)
+ */
+const updateAfterLoading = () => {
+  return new Promise((resolve) => {
+    const styleObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.target.style.display === "none") {
+          resolve();
+        }
+      });
+    });
+
+    styleObserver.observe(loader, {
+      attributes: true,
+      attributeFilter: ["style"],
+    });
+  });
+};
+
+// was used as test but could be useful in the future depending on URLparams update
+/* const detectSelectedTab = () => {
+  return new Promise((resolve) => {
+    const childChangeObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.target.className.match("selected")) {
+          // first time clicking on horse = empty 'style', then 'style="display: block;"'
+          resolve("horse");
+        } else {
+          resolve("other");
+        }
+      });
+    });
+
+    childChangeObserver.observe(tabChevaux, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+  });
+}; */
+
 function querySelectorAllLive(el, selector) {
   const result = Array.prototype.slice.call(el.querySelectorAll(selector));
 
-  const observer = new MutationObserver((mutations) => {
+  const nodeObserver = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
       [].forEach.call(mutation.addedNodes, (node) => {
         if (node.nodeType === NODE.ELEMENT_NODE && node.matches(selector)) {
           result.push(node);
+          nodeObserver.disconnect();
         }
       });
     });
   });
 
-  observer.observe(el, { childList: true, subtree: true });
+  nodeObserver.observe(el, { childList: true, subtree: true });
 
   return result;
 }
@@ -54,7 +99,7 @@ const elevageLocation =
 const sellsLocation = window.location.href.indexOf("marche/vente") > -1;
 const boxesLocation = window.location.href.indexOf("centre/box") > -1;
 const communauteLocation =
-  window.location.href.indexOf("communaute/?type=tab-chevaux") > -1;
+  window.location.href.indexOf("communaute/?type=tab") > -1;
 
 let locationAllowed;
 if (elevageLocation || sellsLocation || boxesLocation || communauteLocation) {
@@ -71,6 +116,7 @@ function moreInfos() {
       .then((res) => res.text())
       .then((data) => {
         const infoDiv = document.createElement("div");
+        infoDiv.className = "infodiv";
         infoDiv.style.display = "flex";
         infoDiv.style.flexFlow = "column nowrap";
         infoDiv.style.margin = ".25em 0";
@@ -101,6 +147,7 @@ function moreInfos() {
             );
           }
 
+          // pegase / VIP
           if (
             !isDetailedView &&
             !(window.location.href.indexOf("marche/vente") > -1)
@@ -140,33 +187,69 @@ function moreInfos() {
         if (locationAllowed) {
           name.parentNode.insertBefore(infoDiv, name.nextSibling);
 
-          // remvoe <br> element before affixes in some views (cf: detailed view in breeding)
+          // remove <br> element before affixes in some views (cf: detailed view in breeding)
           const br = name.parentNode.querySelector("br");
           br && br.remove();
+          return;
         }
+        return;
       });
   });
 }
 
-const breedingsBtn = document.getElementsByClassName("tab-action-select");
+/**
+ * handle the pages at the bottom of the community horse tab during a research to update infodiv after clicking them
+ */
+const handleDataPages = () => {
+  const dataPages = document.querySelectorAll("a[data-page]");
+  if (dataPages.length > 0) {
+    dataPages.forEach((datapage) => {
+      datapage.addEventListener("click", async () => {
+        await updateAfterLoading();
+        moreInfos();
+        handleDataPages();
+      });
+    });
+  }
+};
 
-Array.from(breedingsBtn).forEach((breedingBtn) => {
-  breedingBtn.addEventListener("click", () => {
+const handleCurrentTab = async () => {
+  if (window.location.href.indexOf("communaute/?type=tab-che") > -1) {
+    setTimeout(() => {
+      const searchBtnCommunaute = document.querySelector("#searchHorseButton");
+      searchBtnCommunaute.addEventListener("click", async () => {
+        await updateAfterLoading();
+        moreInfos();
+        handleDataPages();
+      });
+    }, 400);
+  } else return;
+};
+
+window.onload = async () => {
+  if (locationAllowed) {
     setTimeout(() => {
       moreInfos();
-    }, 250);
-  });
-});
+    }, 500);
+  }
 
-setTimeout(() => {
-  const searchBtnCommunaute = document.querySelector("#searchHorseButton");
-  searchBtnCommunaute.addEventListener("click", () => {
-    setTimeout(() => {
-      moreInfos();
-    }, 300);
-  });
-}, 400);
+  if (elevageLocation) {
+    const breedingsBtn = document.getElementsByClassName("tab-action-select");
+    Array.from(breedingsBtn).forEach((breedingBtn) => {
+      breedingBtn.addEventListener("click", async () => {
+        await updateAfterLoading();
+        moreInfos();
+      });
+    });
+  }
 
-setTimeout(() => {
-  moreInfos();
-}, 250);
+  if (communauteLocation) {
+    await handleCurrentTab();
+    const tabs = document.getElementsByClassName("tab-style-6-0-0");
+    Array.from(tabs).forEach((tab) => {
+      tab.addEventListener("click", async () => {
+        await handleCurrentTab();
+      });
+    });
+  }
+};
