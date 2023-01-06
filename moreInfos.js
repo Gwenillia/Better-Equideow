@@ -21,7 +21,7 @@ const regexpFloat = /[+-]?(?=\d*[.eE])(?=\.?\d)\d*\.?\d*(?:[eE][+-]?\d+)?/;
 const regexpValue = /\>(.*?)\</;
 
 const loader = document.querySelector("#loading");
-const tabChevaux = document.querySelector("#tab-chevaux");
+// const tabChevaux = document.querySelector("#tab-chevaux"); cf: func detectSelectedTab
 
 /**
  * Reload moreInfos function after #loading element is not displayed anymore (SPA)
