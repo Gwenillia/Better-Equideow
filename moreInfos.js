@@ -76,14 +76,10 @@ function moreInfos() {
         infoDiv.style.margin = ".25em 0";
         infoDiv.style.color = "#993322";
 
-        console.log(communauteLocation);
-        //        if (elevageLocation || sellsLocation) {
         if (!boxesLocation && locationAllowed) {
-          console.log("location not box");
           const blupHtml = data.match(regexpBlupHtml);
           const PetHtml =
             data.match(regexpPetHtmlOthers) || data.match(regexpPetHtmlSelf);
-          console.log(PetHtml);
           if (blupHtml) {
             const blupFloat = blupHtml[0].match(regexpFloat);
             parseHTML(
@@ -95,9 +91,7 @@ function moreInfos() {
             );
           }
           if (PetHtml) {
-            console.log(PetHtml);
             const PetName = PetHtml[0].match(regexpValue);
-            console.log(PetName);
             parseHTML(
               infoDiv,
               `<p><span style='font-weight: bold;'>${
@@ -169,9 +163,9 @@ setTimeout(() => {
   searchBtnCommunaute.addEventListener("click", () => {
     setTimeout(() => {
       moreInfos();
-    }, 250);
+    }, 300);
   });
-}, 250);
+}, 400);
 
 setTimeout(() => {
   moreInfos();
