@@ -12,8 +12,10 @@ const regexpPGHtml =
   /<strong>Total.+[+-]?(?=\d*[.eE])(?=\.?\d)\d*\.?\d*(?:[eE][+-]?\d+)?<\/strong>/;
 const regexpSkillsHtml =
   /<span id="competencesValeur">[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?<\/span>/;
-const regexpPetHtml =
+const regexpPetHtmlOthers =
   /<h3 class="align-center module-style-6-title module-title">.*<\/h3>/;
+const regexpPetHtmlSelf =
+  /<h3 id="compagnon-head-title" class="align-center module-style-6-title module-title">.*<\/h3>/;
 
 const regexpFloat = /[+-]?(?=\d*[.eE])(?=\.?\d)\d*\.?\d*(?:[eE][+-]?\d+)?/;
 const regexpValue = /\>(.*?)\</;
@@ -74,7 +76,9 @@ function moreInfos() {
 
         if (elevageLocation || sellsLocation) {
           const blupHtml = data.match(regexpBlupHtml);
-          const PetHtml = data.match(regexpPetHtml);
+          const PetHtml =
+            data.match(regexpPetHtmlOthers) || data.match(regexpPetHtmlSelf);
+          console.log(PetHtml);
           if (blupHtml) {
             const blupFloat = blupHtml[0].match(regexpFloat);
             parseHTML(
@@ -86,6 +90,7 @@ function moreInfos() {
             );
           }
           if (PetHtml) {
+            console.log(PetHtml);
             const PetName = PetHtml[0].match(regexpValue);
             console.log(PetName);
             parseHTML(
