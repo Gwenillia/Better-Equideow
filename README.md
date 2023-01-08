@@ -6,6 +6,7 @@ aussi d'afficher un coefficient de victoire pour mieux gérer ses blups notammen
 Il s'agit la des nouvelles et anciennes version de l'extension trouvable en stores. 
 Ainsi que de la version vX.Y.Z qui est ma version personnel (incluant des features de l'abonnement VIP).
 La version vX.Y.Z n'arrivera jamais dans les store et est buggué et non fiable.
+
 ---
 ## Better Howrse
 Small chrome extension for Howrse that allow you to get more informations about
