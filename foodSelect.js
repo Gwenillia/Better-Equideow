@@ -12,7 +12,7 @@ class FoodSelect {
     this.haySlider = this.setHTMLElement("#haySlider") || null // entire bloc containing ol, script, li, span
     this.haySelectors = this.haySlider?.getElementsByTagName("span") // all span selectors from 0 to 20
     this.oatsSlider = this.setHTMLElement("#oatsSlider") || null
-    this.oatsSelectors = this.oatsSlider?.getElementsByTagName("span");
+    this.oatsSelectors = this.oatsSlider?.getElementsByTagName("span")
   }
 
   setHTMLElement(element) {
@@ -30,29 +30,29 @@ class FoodSelect {
     // will get the value eg: XX/20 for hay and X/16 for oats.
     const fourrageNode = document.getElementsByClassName(
       "section-fourrage section-fourrage-target"
-    );
+    )
     const avoineNode = document.getElementsByClassName(
       "section-avoine section-avoine-target"
-    );
+    )
 
     if (fourrageNode.length > 0) {
       const fourrageIndex = this.getFoodIndex(fourrageNode[0])
-      this.haySelectors[fourrageIndex].click();
+      this.haySelectors[fourrageIndex].click()
     }
 
     if (avoineNode.length > 0) {
-      const avoineIndex = this.getFoodIndex(avoineNode[0]);
-      this.oatsSelectors[avoineIndex].click();
+      const avoineIndex = this.getFoodIndex(avoineNode[0])
+      this.oatsSelectors[avoineIndex].click()
     }
   }
 }
 
 if (window.location.href.indexOf("elevage/chevaux/cheval?") > -1) {
-  const foodSelect = new FoodSelect();
+  const foodSelect = new FoodSelect()
   if (foodSelect.feedingBtn !== null)
     foodSelect.feedingBtn.addEventListener("click", () => {
       foodSelect.run()
-    });
+    })
 
   /**
   * @description generate a new FoodSelect() because after #loading style change, 
