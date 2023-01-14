@@ -89,6 +89,8 @@ class Translation {
     const hostname = (new URL(url)).hostname
     if (hostname.includes('equideow')) {
       return 'fr'
+    } else if (hostname.includes('howrse.com')) {
+      return 'en'
     }
 
     return hostname.match(/\.([^.]+)$/)[1]
