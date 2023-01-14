@@ -2,12 +2,8 @@
   "name": "__MSG_appName__",
   "description": "__MSG_appDesc__",
   "default_locale": "fr",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "manifest_version": 3,
-  "action": {
-    "default_title": "Click to see your horse sells",
-    "default_popup": "popup.html"
-  },
   "author": "TC-Dev",
   "icons": {
     "16": "/images/icon-16x16.png",
@@ -17,9 +13,19 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.equideow.com/*", "*://*.howrse.com/*"],
+      "matches": [
+        "*://*.equideow.com/*",
+        "*://*.howrse.com/*",
+        "*://*.howrse.no/*"
+      ],
       "run_at": "document_end",
-      "js": ["moreInfos.js", "competitionsDiffDisplay.js", "foodSelect.js"]
+      "js": [
+        "translation.js",
+        "loadingDisplayObserver.js",
+        "moreInfos.js",
+        "horseStats.js",
+        "foodSelect.js"
+      ]
     }
   ]
 }
