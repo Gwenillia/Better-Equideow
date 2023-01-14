@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Better Howrse",
+    "description": "Navnet på utvidelsen."
+  },
+  "appDesc": {
+    "message": "Denne utvidelsen viser mer informasjon i spillet om hester og konkurranser for å få deg til å føle deg mer komfortabel når du spiller.",
+    "description": "Beskrivelse av utvidelsen.Beskrivelse av utvidelsen."
+  }
+}
