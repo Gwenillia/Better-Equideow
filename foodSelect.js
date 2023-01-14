@@ -8,14 +8,25 @@
 
 class FoodSelect {
   constructor() {
-    this.feedingBtn = document.getElementById("boutonNourrir");
-    this.haySlider = document.getElementById("haySlider"); // entire bloc containing ol, script, li, span
-    this.haySelectors = this.haySlider.getElementsByTagName("span"); // all span selectors from 0 to 20
-    this.oatsSlider = document.getElementById("oatsSlider");
-    this.oatsSelectors = this.oatsSlider.getElementsByTagName("span");
+    this.feedingBtn = this.setHTMLElement("#boutonNourrir")
+    this.haySlider = this.setHTMLElement("#haySlider") || null // entire bloc containing ol, script, li, span
+    this.haySelectors = this.haySlider?.getElementsByTagName("span") // all span selectors from 0 to 20
+    this.oatsSlider = this.setHTMLElement("#oatsSlider") || null
+    this.oatsSelectors = this.oatsSlider?.getElementsByTagName("span");
   }
 
-  selectFeedAmount() {
+  setHTMLElement(element) {
+    return document.querySelector(element)
+  };
+
+  getFoodIndex(foodNode) {
+    const foodValue = foodNode.innerHTML
+    const foodIndex = parseInt(foodValue)
+    return foodIndex
+  }
+
+
+  async run() {
     // will get the value eg: XX/20 for hay and X/16 for oats.
     const fourrageNode = document.getElementsByClassName(
       "section-fourrage section-fourrage-target"
@@ -24,19 +35,37 @@ class FoodSelect {
       "section-avoine section-avoine-target"
     );
 
-    const fourrageValue = fourrageNode[0].innerHTML;
-    const avoineValue = avoineNode[0].innerHTML;
+    if (fourrageNode.length > 0) {
+      const fourrageIndex = this.getFoodIndex(fourrageNode[0])
+      this.haySelectors[fourrageIndex].click();
+    }
 
-    const fourrageIndex = parseInt(fourrageValue);
-    const avoineIndex = parseInt(avoineValue);
-
-    this.haySelectors[fourrageIndex].click();
-    this.oatsSelectors[avoineIndex].click();
+    if (avoineNode.length > 0) {
+      const avoineIndex = this.getFoodIndex(avoineNode[0]);
+      this.oatsSelectors[avoineIndex].click();
+    }
   }
 }
 
-const foodSelect = new FoodSelect();
+if (window.location.href.indexOf("elevage/chevaux/cheval?") > -1) {
+  const foodSelect = new FoodSelect();
+  if (foodSelect.feedingBtn !== null)
+    foodSelect.feedingBtn.addEventListener("click", () => {
+      foodSelect.run()
+    });
 
-foodSelect.feedingBtn.addEventListener("click", () => {
-  foodSelect.selectFeedAmount();
-});
+  /**
+  * @description generate a new FoodSelect() because after #loading style change, 
+  * it seems like the different this.elements from foodSelect are erased ..
+  * @todo fix it...
+  */
+  const startObserver = () => {
+    observer.start().then(() => {
+      let newFoodSelect = new FoodSelect()
+      newFoodSelect.run()
+      startObserver()
+    })
+  }
+
+  startObserver()
+}
