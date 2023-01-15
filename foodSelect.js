@@ -48,16 +48,24 @@ class FoodSelect {
 }
 
 if (window.location.href.indexOf("elevage/chevaux/cheval?") > -1) {
+  const foodSelect = new FoodSelect()
+  if (foodSelect.feedingBtn !== null)
+    foodSelect.feedingBtn.addEventListener("click", () => {
+      foodSelect.run()
+    })
+
+  /**
+  * @description generate a new FoodSelect() because after #loading style change, 
+  * it seems like the different this.elements from foodSelect are erased ..
+  * @todo fix it...
+  */
   const startObserver = () => {
     observer.start().then(() => {
-      const foodSelect = new FoodSelect()
-      if (foodSelect.feedingBtn !== null)
-        foodSelect.feedingBtn.addEventListener("click", () => {
-          foodSelect.run()
-        })
-
+      let newFoodSelect = new FoodSelect()
+      newFoodSelect.run()
       startObserver()
     })
   }
+
   startObserver()
 }
