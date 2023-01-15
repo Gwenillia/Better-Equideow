@@ -155,8 +155,13 @@ if (moreInfos.locationAllowed) {
 
   const startObserver = () => {
     observer.start().then(() => {
+      const infoDiv = document.getElementsByClassName('infodiv')
+      if (infoDiv.length > 0) {
+        return
+      } else {
       moreInfos.run()
       startObserver()
+      }
     })
   }
   startObserver()
