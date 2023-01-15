@@ -41,6 +41,9 @@ class HorseStats {
     this.jumpingBase = this.calcStatBase('sautValeur')
     this.jumpingBonuses = this.calcStatBonus(new RegExp(`(${translation.get(this.lang, 'stat', 'jumping')}).+?[1-9]\d*`, "g"))
     this.jumpingTotal = this.calcStatTotal(this.jumpingBase, this.jumpingBonuses)
+
+    this.previousHorseButton = document.getElementById('nav-previous')
+    this.nextHorseButton = document.getElementById('nav-next')
   }
 
   convert(value) {
@@ -68,7 +71,7 @@ class HorseStats {
   }
 
   calcStatBase(stat) {
-    return parseFloat(document.getElementById(stat).innerText)
+    return parseFloat(document.getElementById(stat)?.innerText)
   }
 
   calcStatBonus(stat) {
@@ -90,7 +93,7 @@ class HorseStats {
   competitionsDiffDisplay() {
     this.competitionTitle.style.display = 'flex'
     this.competitionTitle.style.flexFlow = 'column nowrap'
-    const hintHTML = `<span style='font-size: .8em;'> ${this.isFrenchApp ? 'Plus le coeff est élevé plus il y a de chances de gagner' : 'The higher the coefficient, the greater the chance of winning'}</span> `
+    const hintHTML = `<span style='font-size: .8em;'> ${translation.get(this.lang, 'competition', 'disclaimer')}</span> `
     const parsedHintHtml = this.parser.parseFromString(hintHTML, `text/html`)
     const hintTags = parsedHintHtml.getElementsByTagName(`span`)
 
@@ -152,7 +155,21 @@ class HorseStats {
     })
   }
 
+  handleArrowKeySwitch(event) {
+    switch (event.keyCode) {
+      case 37:
+        const previousHorseButton = document.getElementById('nav-previous')
+        previousHorseButton.click()
+        break
+      case 39:
+        const nextHorseButton = document.getElementById('nav-next')
+        nextHorseButton.click()
+        break
+    }
+  }
+
   run() {
+    document.addEventListener('keyup', this.handleArrowKeySwitch)
     this.competitionsDiffDisplay()
   }
 }

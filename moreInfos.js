@@ -64,6 +64,9 @@ class MoreInfos {
   }
 
   run() {
+    const infoDivExist = document.getElementsByClassName('infodiv')
+    if (infoDivExist.length > 1) return
+
     const isDetailedView = document.getElementById("detail-chevaux")
     const names = document.getElementsByClassName("horsename")
     const namesArr = Array.from(names)

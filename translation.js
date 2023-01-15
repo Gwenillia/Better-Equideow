@@ -20,7 +20,8 @@ class Translation {
           cutting: 'Cutting',
           trailClass: 'Trail class',
           reining: 'Reining',
-          westernPleasure: 'Western pleasure'
+          westernPleasure: 'Western pleasure',
+          disclaimer: 'Plus le coeff est élevé plus il y a de chances de gagner'
         },
         other: {
           pet: 'Compagnon: ',
@@ -47,7 +48,8 @@ class Translation {
           cutting: 'Cutting',
           trailClass: 'Trail class',
           reining: 'Reining',
-          westernPleasure: 'Western pleasure'
+          westernPleasure: 'Western pleasure',
+          disclaimer: 'The higher the coefficient, the greater the chance of winning'
         },
         other: {
           pet: 'Pet: ',
@@ -74,7 +76,8 @@ class Translation {
           cutting: 'Cutting',
           trailClass: 'Trail class',
           reining: 'Reining',
-          westernPleasure: 'Western pleasure'
+          westernPleasure: 'Western pleasure',
+          disclaimer: 'Jo høyere koeffisient, jo større er sjansen for å vinne'
         },
         other: {
           pet: 'Følgesvenner: ',
