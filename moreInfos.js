@@ -64,6 +64,9 @@ class MoreInfos {
   }
 
   run() {
+    const infoDivExist = document.getElementsByClassName('infodiv')
+    if (infoDivExist.length > 1) return
+
     const isDetailedView = document.getElementById("detail-chevaux")
     const names = document.getElementsByClassName("horsename")
     const namesArr = Array.from(names)
@@ -155,13 +158,8 @@ if (moreInfos.locationAllowed) {
 
   const startObserver = () => {
     observer.start().then(() => {
-      const infoDiv = document.getElementsByClassName('infodiv')
-      if (infoDiv.length > 0) {
-        return
-      } else {
       moreInfos.run()
       startObserver()
-      }
     })
   }
   startObserver()
