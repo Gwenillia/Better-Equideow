@@ -22,7 +22,7 @@ Switch to the previous or next horse using left and right arrow keys on your key
 Here are available all recents and pasts updates of the browser extension that you can find on the stores.
 
 ---
-[![Last Version](https://img.shields.io/badge/last%20version-v2.1.1-informational)](#)
+[![Last Version](https://img.shields.io/badge/last%20version-v2.1.2-informational)](#)
 [![DeepScan grade](https://deepscan.io/api/teams/17688/projects/21040/branches/592899/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=17688&pid=21040&bid=592899)
 
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/gkopbgamdhaolbjalfcbmbjkjcmgffjp)](https://chrome.google.com/webstore/detail/better-equideow/gkopbgamdhaolbjalfcbmbjkjcmgffjp)

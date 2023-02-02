@@ -8,51 +8,44 @@
 
 class FoodSelect {
   constructor() {
-    this.feedingBtn = this.setHTMLElement("#boutonNourrir")
-    this.haySlider = this.setHTMLElement("#haySlider") || null // entire bloc containing ol, script, li, span
-    this.haySelectors = this.haySlider?.getElementsByTagName("span") // all span selectors from 0 to 20
-    this.oatsSlider = this.setHTMLElement("#oatsSlider") || null
+    this.feedingBtn = document.getElementById("boutonNourrir")
+    this.haySlider = document.getElementById("haySlider") || null
+    this.haySelectors = this.haySlider?.getElementsByTagName("span")
+    this.oatsSlider = document.getElementById("oatsSlider") || null
     this.oatsSelectors = this.oatsSlider?.getElementsByTagName("span")
   }
 
-  setHTMLElement(element) {
-    return document.querySelector(element)
-  };
-
   getFoodIndex(foodNode) {
-    const foodValue = foodNode.innerHTML
+    const foodValue = foodNode.textContent
     const foodIndex = parseInt(foodValue)
     return foodIndex
   }
 
-
   async run() {
-    // will get the value eg: XX/20 for hay and X/16 for oats.
-    const fourrageNode = document.getElementsByClassName(
-      "section-fourrage section-fourrage-target"
-    )
-    const avoineNode = document.getElementsByClassName(
-      "section-avoine section-avoine-target"
-    )
+    const fourrageNode = document.getElementsByClassName("section-fourrage section-fourrage-target")[0]
+    const avoineNode = document.getElementsByClassName("section-avoine section-avoine-target")[0]
 
-    if (fourrageNode.length > 0) {
-      const fourrageIndex = this.getFoodIndex(fourrageNode[0])
+    if (fourrageNode) {
+      const fourrageIndex = this.getFoodIndex(fourrageNode)
       this.haySelectors[fourrageIndex].click()
     }
 
-    if (avoineNode.length > 0) {
-      const avoineIndex = this.getFoodIndex(avoineNode[0])
+    if (avoineNode) {
+      const avoineIndex = this.getFoodIndex(avoineNode)
       this.oatsSelectors[avoineIndex].click()
     }
   }
 }
 
-if (window.location.href.indexOf("elevage/chevaux/cheval?") > -1) {
-  const foodSelect = new FoodSelect()
-  if (foodSelect.feedingBtn !== null)
+const horseFeedingPageRegex = /\/elevage\/chevaux\/cheval\?/
+
+if (window.location.href.match(horseFeedingPageRegex)) {
+  let foodSelect = new FoodSelect()
+  if (foodSelect.feedingBtn !== null) {
     foodSelect.feedingBtn.addEventListener("click", () => {
       foodSelect.run()
     })
+  }
 
   /**
   * @description generate a new FoodSelect() because after #loading style change, 
