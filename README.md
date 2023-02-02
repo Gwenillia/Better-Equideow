@@ -11,7 +11,7 @@ Il s'agit la des nouvelles et anciennes version de l'extension trouvable en stor
 
 ---
 ## Better Howrse
-Small chrome extension for Howrse that allow you to get more informations about your horses and competition difficulties. (highest coeff is highest winning rate)
+Small browser extension for Howrse that allow you to get more informations about your horses and competition difficulties. (highest coeff is highest winning rate)
 
 Pet names displayed in the same way as other informations. Also will include theses infos from the research view
 
@@ -22,7 +22,7 @@ Switch to the previous or next horse using left and right arrow keys on your key
 Here are available all recents and pasts updates of the browser extension that you can find on the stores.
 
 ---
-[![Last Version](https://img.shields.io/badge/last%20version-v2.1.1-informational)](#)
+[![Last Version](https://img.shields.io/badge/last%20version-v2.1.2-informational)](#)
 [![DeepScan grade](https://deepscan.io/api/teams/17688/projects/21040/branches/592899/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=17688&pid=21040&bid=592899)
 
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/gkopbgamdhaolbjalfcbmbjkjcmgffjp)](https://chrome.google.com/webstore/detail/better-equideow/gkopbgamdhaolbjalfcbmbjkjcmgffjp)
