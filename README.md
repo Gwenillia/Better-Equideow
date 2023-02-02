@@ -11,7 +11,7 @@ Il s'agit la des nouvelles et anciennes version de l'extension trouvable en stor
 
 ---
 ## Better Howrse
-Small chrome extension for Howrse that allow you to get more informations about your horses and competition difficulties. (highest coeff is highest winning rate)
+Small browser extension for Howrse that allow you to get more informations about your horses and competition difficulties. (highest coeff is highest winning rate)
 
 Pet names displayed in the same way as other informations. Also will include theses infos from the research view
 
