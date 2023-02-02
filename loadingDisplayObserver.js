@@ -11,6 +11,7 @@ class LoadingDisplayObserver {
         this.targetNode = document.querySelector('#loading');
         this.config = { attributes: true, attributeFilter: ['style'] };
     }
+
     start() {
         return new Promise((resolve) => {
             this.observer = new MutationObserver((mutationsList) => {
@@ -19,7 +20,8 @@ class LoadingDisplayObserver {
                         let element = mutation.target;
                         let display = window.getComputedStyle(element, null).getPropertyValue("display");
                         if (display === "none") {
-                            resolve();
+                          resolve();
+                          this.stop();
                         }
                     }
                 }
