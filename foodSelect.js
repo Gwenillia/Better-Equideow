@@ -13,12 +13,18 @@ class FoodSelect {
     this.haySelectors = this.haySlider?.getElementsByTagName("span")
     this.oatsSlider = document.getElementById("oatsSlider") || null
     this.oatsSelectors = this.oatsSlider?.getElementsByTagName("span")
+    this.messageBox = document.getElementById("messageBoxInline")?.textContent
   }
 
   getFoodIndex(foodNode) {
-    const foodValue = foodNode.textContent
-    const foodIndex = parseInt(foodValue)
-    return foodIndex
+    if (this.messageBox) {
+      return this.messageBox.includes('20') ? 20 : 0
+    } 
+    else {
+      const foodValue = foodNode.textContent
+      const foodIndex = parseInt(foodValue)
+      return foodIndex
+    }
   }
 
   async run() {
