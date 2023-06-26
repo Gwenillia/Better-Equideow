@@ -14,10 +14,12 @@ class FoodSelect {
     this.oatsSlider = document.getElementById("oatsSlider") || null
     this.oatsSelectors = this.oatsSlider?.getElementsByTagName("span")
     this.messageBox = document.getElementById("messageBoxInline")?.textContent
+    this.fourrageNode = document.getElementsByClassName("section-fourrage section-fourrage-target")[0]
+    this.avoineNode = document.getElementsByClassName("section-avoine section-avoine-target")[0]
   }
 
   getFoodIndex(foodNode) {
-    if (this.messageBox) {
+    if (this.messageBox && foodNode === this.fourrageNode) {
       return this.messageBox.includes('20') ? 20 : 0
     } 
     else {
@@ -28,16 +30,13 @@ class FoodSelect {
   }
 
   async run() {
-    const fourrageNode = document.getElementsByClassName("section-fourrage section-fourrage-target")[0]
-    const avoineNode = document.getElementsByClassName("section-avoine section-avoine-target")[0]
-
-    if (fourrageNode) {
-      const fourrageIndex = this.getFoodIndex(fourrageNode)
+    if (this.fourrageNode) {
+      const fourrageIndex = this.getFoodIndex(this.fourrageNode)
       this.haySelectors[fourrageIndex].click()
     }
 
-    if (avoineNode) {
-      const avoineIndex = this.getFoodIndex(avoineNode)
+    if (this.avoineNode) {
+      const avoineIndex = this.getFoodIndex(this.avoineNode)
       this.oatsSelectors[avoineIndex].click()
     }
   }
