@@ -24,11 +24,7 @@ Here are available all recents and pasts updates of the browser extension that y
 ---
 ## Contributing
 
-We encourage you to contribute to [Your Project Name]! Please check out the [Contributing to [Your Project Name] guide](./CONTRIBUTING.md) for guidelines about how to proceed.
-
-## Code of Conduct
-
-Everyone interacting in the [Your Project Name] codebases, issue trackers, chat rooms, and mailing lists is expected to follow the [Code of Conduct](./CODE_OF_CONDUCT.md).
+I encourage you to contribute to Better Howrse! Please check out the [Contributing to Better Howrse guide](./CONTRIBUTING.md) for guidelines about how to proceed.
 
 ---
 [![Last Version](https://img.shields.io/badge/last%20version-v2.2.2-informational)](#)
