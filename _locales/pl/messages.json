@@ -1,11 +1,11 @@
 {
   "appName": {
     "message": "Better Howrse",
-    "description": "Navnet på utvidelsen."
+    "description": "Name of the extension."
   },
   "appDesc": {
-    "message": "Denne utvidelsen viser mer informasjon i spillet om hester og konkurranser for å få deg til å føle deg mer komfortabel når du spiller.",
-    "description": "Beskrivelse av utvidelsen.Beskrivelse av utvidelsen."
+    "message": "This extension displays more informations in the game about horses and competitions to make you feel more comfortable when playing.",
+    "description": "Description of the extension."
   },
   "foodSelect": {
     "message": "Auto Food Select",
@@ -20,3 +20,4 @@
     "description": "Label for the competition ratio checkbox in popup"
   }
 }
+
