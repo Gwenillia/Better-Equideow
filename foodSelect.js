@@ -30,15 +30,19 @@ class FoodSelect {
   }
 
   async run() {
-    if (this.fourrageNode) {
-      const fourrageIndex = this.getFoodIndex(this.fourrageNode)
-      this.haySelectors[fourrageIndex].click()
-    }
+    chrome.storage.sync.get({ 'foodSelect': true }, (data) => {
+      if (data.foodSelect) {
+        if (this.fourrageNode) {
+          const fourrageIndex = this.getFoodIndex(this.fourrageNode)
+          this.haySelectors[fourrageIndex].click()
+        }
 
-    if (this.avoineNode) {
-      const avoineIndex = this.getFoodIndex(this.avoineNode)
-      this.oatsSelectors[avoineIndex].click()
-    }
+        if (this.avoineNode) {
+          const avoineIndex = this.getFoodIndex(this.avoineNode)
+          this.oatsSelectors[avoineIndex].click()
+        }
+      }
+    })
   }
 }
 

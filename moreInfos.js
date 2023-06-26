@@ -64,89 +64,93 @@ class MoreInfos {
   }
 
   run() {
-    const infoDivExist = document.getElementsByClassName('infodiv')
-    if (infoDivExist.length > 1) return
+    chrome.storage.sync.get({ 'moreInfos': true }, (data) => {
+      if (data.moreInfos) {
+        const infoDivExist = document.getElementsByClassName('infodiv')
+        if (infoDivExist.length > 1) return
 
-    const isDetailedView = document.getElementById("detail-chevaux")
-    const names = document.getElementsByClassName("horsename")
-    const namesArr = Array.from(names)
+        const isDetailedView = document.getElementById("detail-chevaux")
+        const names = document.getElementsByClassName("horsename")
+        const namesArr = Array.from(names)
 
-    namesArr.forEach((name) => {
-      fetch(name.href)
-        .then((res) => res.text())
-        .then((data) => {
-          const infoDiv = document.createElement("div")
-          infoDiv.className = "infodiv"
-          infoDiv.style.display = "flex"
-          infoDiv.style.flexFlow = "column nowrap"
-          infoDiv.style.margin = ".25em 0"
-          infoDiv.style.color = "#993322"
+        namesArr.forEach((name) => {
+          fetch(name.href)
+            .then((res) => res.text())
+            .then((data) => {
+              const infoDiv = document.createElement("div")
+              infoDiv.className = "infodiv"
+              infoDiv.style.display = "flex"
+              infoDiv.style.flexFlow = "column nowrap"
+              infoDiv.style.margin = ".25em 0"
+              infoDiv.style.color = "#993322"
 
-          if (!this.boxesLocation && this.locationAllowed) {
-            const blupHtml = data.match(this.regexpBlupHtml)
-            const PetHtml =
-              data.match(this.regexpPetHtmlOthers) || data.match(this.regexpPetHtmlSelf)
-            if (blupHtml) {
-              const blupFloat = blupHtml[0].match(this.regexpFloat)
-              this.parseHTML(
-                infoDiv,
-                '<p><span style="font-weight: bold;">Blup: </span>' +
-                blupFloat[0] +
-                "</p>",
-                "p"
-              )
-            }
+              if (!this.boxesLocation && this.locationAllowed) {
+                const blupHtml = data.match(this.regexpBlupHtml)
+                const PetHtml =
+                  data.match(this.regexpPetHtmlOthers) || data.match(this.regexpPetHtmlSelf)
+                if (blupHtml) {
+                  const blupFloat = blupHtml[0].match(this.regexpFloat)
+                  this.parseHTML(
+                    infoDiv,
+                    '<p><span style="font-weight: bold;">Blup: </span>' +
+                    blupFloat[0] +
+                    "</p>",
+                    "p"
+                  )
+                }
 
-            if (PetHtml) {
-              const PetName = PetHtml[0].match(this.regexpValue)
-              this.parseHTML(
-                infoDiv,
-                `<p><span style='font-weight: bold;'>${translation.get(this.lang, 'other', 'pet')}</span>${PetName[1]}</p>`,
-                "p"
-              )
-            }
+                if (PetHtml) {
+                  const PetName = PetHtml[0].match(this.regexpValue)
+                  this.parseHTML(
+                    infoDiv,
+                    `<p><span style='font-weight: bold;'>${translation.get(this.lang, 'other', 'pet')}</span>${PetName[1]}</p>`,
+                    "p"
+                  )
+                }
 
-            // pegase / VIP
-            if (
-              !isDetailedView &&
-              !(this.sellsLocation)
-            ) {
-              const PGHtml = data.match(this.regexpPGHtml)
-              if (PGHtml) {
-                const PGFloat = PGHtml[0].match(this.regexpFloat)
-                this.parseHTML(
-                  infoDiv,
-                  `<p><span style='font-weight: bold;'>${translation.get(this.lang, 'other', 'pg')}</span>${PGFloat[0]}</p>`,
-                  "p"
-                )
+                // pegase / VIP
+                if (
+                  !isDetailedView &&
+                  !(this.sellsLocation)
+                ) {
+                  const PGHtml = data.match(this.regexpPGHtml)
+                  if (PGHtml) {
+                    const PGFloat = PGHtml[0].match(this.regexpFloat)
+                    this.parseHTML(
+                      infoDiv,
+                      `<p><span style='font-weight: bold;'>${translation.get(this.lang, 'other', 'pg')}</span>${PGFloat[0]}</p>`,
+                      "p"
+                    )
+                  }
+                }
               }
-            }
-          }
 
-          if (
-            (this.elevageLocation && !isDetailedView) || this.boxesLocation
-          ) {
-            const skillsHtml = data.match(this.regexpSkillsHtml)
-            if (skillsHtml) {
-              const skillsFloat = skillsHtml[0].match(this.regexpFloat)
-              this.parseHTML(
-                infoDiv,
-                `<p><span style='font-weight: bold;'>${translation.get(this.lang, 'other', 'skills')}</span>${skillsFloat[0]}</p>`,
-                "p"
-              )
-            }
-          }
+              if (
+                (this.elevageLocation && !isDetailedView) || this.boxesLocation
+              ) {
+                const skillsHtml = data.match(this.regexpSkillsHtml)
+                if (skillsHtml) {
+                  const skillsFloat = skillsHtml[0].match(this.regexpFloat)
+                  this.parseHTML(
+                    infoDiv,
+                    `<p><span style='font-weight: bold;'>${translation.get(this.lang, 'other', 'skills')}</span>${skillsFloat[0]}</p>`,
+                    "p"
+                  )
+                }
+              }
 
-          if (this.locationAllowed) {
-            name.parentNode.insertBefore(infoDiv, name.nextSibling)
+              if (this.locationAllowed) {
+                name.parentNode.insertBefore(infoDiv, name.nextSibling)
 
-            // remove <br> element before affixes in some views (cf: detailed view in breeding)
-            const br = name.parentNode.querySelector("br")
-            br && br.remove()
-            return
-          }
-          return
+                // remove <br> element before affixes in some views (cf: detailed view in breeding)
+                const br = name.parentNode.querySelector("br")
+                br && br.remove()
+                return
+              }
+              return
+            })
         })
+      }
     })
   }
 }
