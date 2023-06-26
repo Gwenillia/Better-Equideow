@@ -84,19 +84,54 @@ class Translation {
           pg: 'GP: ',
           skills: 'Ferdigheter: '
         }
+      },
+      pl: {
+        stat: {
+          stamina: 'stamina',
+          speed: 'speed',
+          dressage: 'dressage',
+          gallop: 'gallop',
+          trot: 'trot',
+          jumping: 'jumping'
+        },
+        competition: {
+          trot: 'Trot',
+          gallop: 'Gallop',
+          dressage: 'Dressage',
+          crossCountry: 'Cross-country',
+          showJumping: 'Show jumping',
+          barrelRacing: 'Barrel racing',
+          cutting: 'Cutting',
+          trailClass: 'Trail class',
+          reining: 'Reining',
+          westernPleasure: 'Western pleasure',
+          disclaimer: 'The higher the coefficient, the greater the chance of winning'
+        },
+        other: {
+          pet: 'Pet: ',
+          pg: 'GP: ',
+          skills: 'Skills: '
+        }
       }
     }
   }
 
   getLang(url) {
-    const hostname = (new URL(url)).hostname
-    if (hostname.includes('equideow')) {
-      return 'fr'
-    } else if (hostname.includes('howrse.com')) {
-      return 'en'
+    const hostname = (new URL(url)).hostname;
+  
+    const languageMap = {
+      'equideow': 'fr',
+      'howrse.no': 'no',
+      'howrse.pl': 'pl'
+    };
+
+    for (let domain in languageMap) {
+      if (hostname.includes(domain)) {
+        return languageMap[domain];
+      }
     }
 
-    return hostname.match(/\.([^.]+)$/)[1]
+    return 'en'; 
   }
 
   get(lang, category, key) {
