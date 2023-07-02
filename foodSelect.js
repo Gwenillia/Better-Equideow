@@ -13,7 +13,8 @@ class FoodSelect {
     this.haySelectors = this.haySlider?.getElementsByTagName("span")
     this.oatsSlider = document.getElementById("oatsSlider") || null
     this.oatsSelectors = this.oatsSlider?.getElementsByTagName("span")
-    this.messageBox = document.getElementById("messageBoxInline")?.textContent
+    this.careTabFeed = document.getElementById('care-tab-feed')
+    this.messageBox = this.careTabFeed.querySelector("#messageBoxInline")?.textContent
     this.fourrageNode = document.getElementsByClassName("section-fourrage section-fourrage-target")[0]
     this.avoineNode = document.getElementsByClassName("section-avoine section-avoine-target")[0]
   }
