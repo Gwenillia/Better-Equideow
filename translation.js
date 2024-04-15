@@ -127,7 +127,7 @@ class Translation {
           gallop: 'Galope',
           dressage: 'Doma',
           crossCountry: 'Cross',
-          showJumping: 'Carrera de obstaculos',
+          showJumping: 'Carrera de obstáculos',
           barrelRacing: 'Barrel racing',
           cutting: 'Cutting',
           trailClass: 'Trail class',
