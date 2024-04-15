@@ -113,7 +113,6 @@ class Translation {
           skills: 'Skills: '
         }
       },
-      ,
       es: {
         stat: {
           stamina: 'resistencia',
