@@ -112,6 +112,35 @@ class Translation {
           pg: 'GP: ',
           skills: 'Skills: '
         }
+      },
+      ,
+      es: {
+        stat: {
+          stamina: 'resistencia',
+          speed: 'velocidad',
+          dressage: 'doma',
+          gallop: 'galope',
+          trot: 'trote',
+          jumping: 'salto'
+        },
+        competition: {
+          trot: 'Trote',
+          gallop: 'Galope',
+          dressage: 'Doma',
+          crossCountry: 'Cross',
+          showJumping: 'Carrera de obstaculos',
+          barrelRacing: 'Barrel racing',
+          cutting: 'Cutting',
+          trailClass: 'Trail class',
+          reining: 'Reining',
+          westernPleasure: 'Western pleasure',
+          disclaimer: 'Cuanto mayores sean las habilidades, mayores serán las posibilidades de ganar'
+        },
+        other: {
+          pet: 'Mascota: ',
+          pg: 'PG: ',
+          skills: 'Habilidades: '
+        }
       }
     }
   }
@@ -122,7 +151,8 @@ class Translation {
     const languageMap = {
       'equideow': 'fr',
       'howrse.no': 'no',
-      'howrse.pl': 'pl'
+      'howrse.pl': 'pl',
+      'caballow.com': 'es'
     };
 
     for (let domain in languageMap) {
