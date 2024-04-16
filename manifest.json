@@ -24,7 +24,8 @@
         "*://*.equideow.com/*",
         "*://*.howrse.com/*",
         "*://*.howrse.no/*",
-        "*://*.howrse.co.uk/*"
+        "*://*.howrse.co.uk/*",
+        "*://*.caballow.com/*"
       ],
       "run_at": "document_end",
       "js": [

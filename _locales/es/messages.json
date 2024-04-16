@@ -1,0 +1,22 @@
+{
+  "appName": {
+    "message": "Better Caballow",
+    "description": "Nombre de la extensión."
+  },
+  "appDesc": {
+    "message": "Esta extensión muestra más información en el juego sobre caballos y competiciones para que te sientas más cómodo al jugar.",
+    "description": "Descripción de la extensión."
+  },
+  "foodSelect": {
+    "message": "Auto Selección de Comida",
+    "description": "Label para la casilla de selección de comida."
+  },
+  "moreInfos": {
+    "message": "Más Info",
+    "description": "Label para la casilla más información."
+  },
+  "competitionRatio": {
+    "message": "Ratio de Competición ",
+    "description": "Label para el ratio de competición."
+  }
+}
