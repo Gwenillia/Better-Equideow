@@ -27,6 +27,11 @@ class Translation {
           pet: 'Compagnon: ',
           pg: 'PG: ',
           skills: 'Compétences: '
+        },
+        sex: {
+          female: 'female',
+          male: 'male',
+          gelding: 'gelding'
         }
       },
       en: {
@@ -55,6 +60,11 @@ class Translation {
           pet: 'Pet: ',
           pg: 'GP: ',
           skills: 'Skills: '
+        },
+        sex: {
+          female: 'female',
+          male: 'male',
+          gelding: 'gelding'
         }
       },
       no: {
@@ -83,6 +93,11 @@ class Translation {
           pet: 'Følgesvenner: ',
           pg: 'GP: ',
           skills: 'Ferdigheter: '
+        },
+        sex: {
+          female: 'female',
+          male: 'male',
+          gelding: 'gelding'
         }
       },
       pl: {
@@ -111,6 +126,11 @@ class Translation {
           pet: 'Pet: ',
           pg: 'GP: ',
           skills: 'Skills: '
+        },
+        sex: {
+          female: 'female',
+          male: 'male',
+          gelding: 'gelding'
         }
       },
       es: {
@@ -139,6 +159,11 @@ class Translation {
           pet: 'Mascota: ',
           pg: 'PG: ',
           skills: 'Habilidades: '
+        },
+        sex: {
+          female: 'hembra',
+          male: 'macho',
+          gelding: 'castrado'
         }
       }
     }

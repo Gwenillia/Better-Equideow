@@ -92,9 +92,9 @@ class MoreInfos {
 
               const sexHTML = data.match(this.regexpSexHtml);
               const img = document.createElement("img")
-              if (sexHTML[1] === "hembra") {
+              if (sexHTML[1] === `${translation.get(this.lang, 'sex', 'female')}`) {
                 img.src = chrome.runtime.getURL("images/female.png")
-              } else if (sexHTML[1] === "macho") {
+              } else if (sexHTML[1] === `${translation.get(this.lang, 'sex', 'male')}`) {
                 img.src = chrome.runtime.getURL("images/male.png")
               } else {
                 img.src = chrome.runtime.getURL("images/gelding.png")
