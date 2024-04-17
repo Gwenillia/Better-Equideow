@@ -8,6 +8,9 @@
 
 class MoreInfos {
   constructor() {
+    this.parser = new DOMParser()
+    this.lang = translation.getLang(window.location.href)
+
     this.regexpBlupHtml =
       /<td class="last align-right" width="15%" dir="ltr"><strong class="nowrap">[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?<\/strong><\/td>/
     this.regexpPGHtml =
@@ -18,13 +21,12 @@ class MoreInfos {
       /<h3 class="align-center module-style-6-title module-title">.*<\/h3>/
     this.regexpPetHtmlSelf =
       /<h3 id="compagnon-head-title" class="align-center module-style-6-title module-title">.*<\/h3>/
-    this.regexpSexHtml = /<td class="first"><strong>Sexo:<\/strong>\s*(\w+)<\/td>/ //todo aqui me falta tambien un traductor
+
+    const genderLabel = `${translation.get(this.lang, 'sex', 'genderLabel')}`;
+    this.regexpSexHtml = `<td class="first"><strong>${genderLabel}<\/strong>\\s*(\\w+)<\/td>`;
 
     this.regexpFloat = /[+-]?(?=\d*[.eE])(?=\.?\d)\d*\.?\d*(?:[eE][+-]?\d+)?/
     this.regexpValue = /\>(.*?)\</
-
-    this.parser = new DOMParser()
-    this.lang = translation.getLang(window.location.href)
 
     this.elevageLocation =
       window.location.href.indexOf("elevage/chevaux/?elevage") > -1

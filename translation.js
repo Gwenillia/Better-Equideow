@@ -29,9 +29,10 @@ class Translation {
           skills: 'Compétences: '
         },
         sex: {
-          female: 'female',
-          male: 'male',
-          gelding: 'gelding'
+          genderLabel: "Sexe:",
+          female: 'femelle',
+          male: 'mâle',
+          gelding: 'hongre'
         }
       },
       en: {
@@ -62,6 +63,7 @@ class Translation {
           skills: 'Skills: '
         },
         sex: {
+          genderLabel: "Gender:",
           female: 'female',
           male: 'male',
           gelding: 'gelding'
@@ -95,6 +97,7 @@ class Translation {
           skills: 'Ferdigheter: '
         },
         sex: {
+          genderLabel: "Gender:",
           female: 'female',
           male: 'male',
           gelding: 'gelding'
@@ -128,6 +131,7 @@ class Translation {
           skills: 'Skills: '
         },
         sex: {
+          genderLabel: "Gender:",
           female: 'female',
           male: 'male',
           gelding: 'gelding'
@@ -161,6 +165,7 @@ class Translation {
           skills: 'Habilidades: '
         },
         sex: {
+          genderLabel: "Sexo:",
           female: 'hembra',
           male: 'macho',
           gelding: 'castrado'
