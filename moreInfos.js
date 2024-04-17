@@ -18,7 +18,7 @@ class MoreInfos {
       /<h3 class="align-center module-style-6-title module-title">.*<\/h3>/
     this.regexpPetHtmlSelf =
       /<h3 id="compagnon-head-title" class="align-center module-style-6-title module-title">.*<\/h3>/
-    this.regexpSexHtml = /<td class="first"><strong>Sexo:<\/strong>\s*(\w+)<\/td>/
+    this.regexpSexHtml = /<td class="first"><strong>Sexo:<\/strong>\s*(\w+)<\/td>/ //todo aqui me falta tambien un traductor
 
     this.regexpFloat = /[+-]?(?=\d*[.eE])(?=\.?\d)\d*\.?\d*(?:[eE][+-]?\d+)?/
     this.regexpValue = /\>(.*?)\</
@@ -85,25 +85,27 @@ class MoreInfos {
               infoDiv.style.margin = ".25em 0"
               infoDiv.style.color = "#993322"
 
-              const imageContainerDiv = document.createElement("div")
-              imageContainerDiv.style.position = "absolute"
-              imageContainerDiv.style.top = "0"
-              imageContainerDiv.style.right = "0"
+              if (this.elevageLocation) {
+                  const imageContainerDiv = document.createElement("div")
+                  imageContainerDiv.style.position = "absolute"
+                  imageContainerDiv.style.top = "0"
+                  imageContainerDiv.style.right = "0"
 
-              const sexHTML = data.match(this.regexpSexHtml);
-              const img = document.createElement("img")
-              if (sexHTML[1] === `${translation.get(this.lang, 'sex', 'female')}`) {
-                img.src = chrome.runtime.getURL("images/female.png")
-              } else if (sexHTML[1] === `${translation.get(this.lang, 'sex', 'male')}`) {
-                img.src = chrome.runtime.getURL("images/male.png")
-              } else {
-                img.src = chrome.runtime.getURL("images/gelding.png")
+                  const sexHTML = data.match(this.regexpSexHtml);
+                  const img = document.createElement("img")
+                  if (sexHTML[1] === `${translation.get(this.lang, 'sex', 'female')}`) {
+                    img.src = chrome.runtime.getURL("images/female.png")
+                  } else if (sexHTML[1] === `${translation.get(this.lang, 'sex', 'male')}`) {
+                    img.src = chrome.runtime.getURL("images/male.png")
+                  } else {
+                    img.src = chrome.runtime.getURL("images/gelding.png")
+                  }
+                  img.style.width = "auto"
+                  img.style.height = "auto"
+                  imageContainerDiv.appendChild(img)
+
+                  infoDiv.appendChild(imageContainerDiv)
               }
-              img.style.width = "auto"
-              img.style.height = "auto"
-              imageContainerDiv.appendChild(img)
-
-              infoDiv.appendChild(imageContainerDiv)
 
               if (!this.boxesLocation && this.locationAllowed) {
                 const blupHtml = data.match(this.regexpBlupHtml)
