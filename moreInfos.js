@@ -93,8 +93,6 @@ class MoreInfos {
 
                 const img = document.createElement("img")
                 
-                console.log(sexHTML[1])
-                console.log(`translation ${translation.get(this.lang, 'sex', 'female')}`)
                 if (sexHTML[1] === `${translation.get(this.lang, 'sex', 'female')}`) {
                   img.src = chrome.runtime.getURL("images/female.png")
                 } else if (sexHTML[1] === `${translation.get(this.lang, 'sex', 'male')}`) {
