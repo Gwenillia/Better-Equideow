@@ -8,6 +8,9 @@
 
 class MoreInfos {
   constructor() {
+    this.parser = new DOMParser()
+    this.lang = translation.getLang(window.location.href)
+
     this.regexpBlupHtml =
       /<td class="last align-right" width="15%" dir="ltr"><strong class="nowrap">[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?<\/strong><\/td>/
     this.regexpPGHtml =
@@ -19,11 +22,11 @@ class MoreInfos {
     this.regexpPetHtmlSelf =
       /<h3 id="compagnon-head-title" class="align-center module-style-6-title module-title">.*<\/h3>/
 
+    const genderLabel = `${translation.get(this.lang, 'sex', 'genderLabel')}`;
+    this.regexpSexHtml = `<td class="first"><strong>${genderLabel}<\/strong>\s*([^<]+)<\/td>`;
+
     this.regexpFloat = /[+-]?(?=\d*[.eE])(?=\.?\d)\d*\.?\d*(?:[eE][+-]?\d+)?/
     this.regexpValue = /\>(.*?)\</
-
-    this.parser = new DOMParser()
-    this.lang = translation.getLang(window.location.href)
 
     this.elevageLocation =
       window.location.href.indexOf("elevage/chevaux/?elevage") > -1
@@ -83,6 +86,26 @@ class MoreInfos {
               infoDiv.style.flexFlow = "column nowrap"
               infoDiv.style.margin = ".25em 0"
               infoDiv.style.color = "#993322"
+
+
+              if (this.elevageLocation) {
+                const sexHTML = data.match(this.regexpSexHtml);
+
+                const img = document.createElement("img")
+                
+                console.log(sexHTML[1])
+                console.log(`translation ${translation.get(this.lang, 'sex', 'female')}`)
+                if (sexHTML[1] === `${translation.get(this.lang, 'sex', 'female')}`) {
+                  img.src = chrome.runtime.getURL("images/female.png")
+                } else if (sexHTML[1] === `${translation.get(this.lang, 'sex', 'male')}`) {
+                  img.src = chrome.runtime.getURL("images/male.png")
+                } else {
+                  img.src = chrome.runtime.getURL("images/gelding.png")
+                }
+
+                name.innerHTML = `<div style="display: flex; justify-content: space-between; height: 1rem;">${name.innerHTML}</div>`
+                name.firstChild.appendChild(img)
+              }
 
               if (!this.boxesLocation && this.locationAllowed) {
                 const blupHtml = data.match(this.regexpBlupHtml)

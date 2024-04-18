@@ -12,6 +12,19 @@
     "48": "/images/icon-48x48.png",
     "128": "/images/icon-128x128.png"
   },
+  "web_accessible_resources": [
+    {
+      "resources": ["images/male.png", "images/female.png", "images/gelding.png"],
+      "matches": [
+        "*://*.equideow.com/*",
+        "*://*.howrse.com/*",
+        "*://*.howrse.no/*",
+        "*://*.howrse.co.uk/*",
+        "*://*.caballow.com/*",
+        "*://*.howrse.pl/*"
+      ]
+    }
+  ],
   "action": {
     "default_popup": "popup.html"
   },
@@ -25,7 +38,8 @@
         "*://*.howrse.com/*",
         "*://*.howrse.no/*",
         "*://*.howrse.co.uk/*",
-        "*://*.caballow.com/*"
+        "*://*.caballow.com/*",
+        "*://*.howrse.pl/*"
       ],
       "run_at": "document_end",
       "js": [

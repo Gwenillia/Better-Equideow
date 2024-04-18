@@ -27,6 +27,12 @@ class Translation {
           pet: 'Compagnon: ',
           pg: 'PG: ',
           skills: 'Compétences: '
+        },
+        sex: {
+          genderLabel: "Sexe :",
+          female: ' femelle',
+          male: ' mâle',
+          gelding: ' hongre'
         }
       },
       en: {
@@ -55,6 +61,12 @@ class Translation {
           pet: 'Pet: ',
           pg: 'GP: ',
           skills: 'Skills: '
+        },
+        sex: {
+          genderLabel: "Gender:",
+          female: ' female',
+          male: ' male',
+          gelding: ' gelding'
         }
       },
       no: {
@@ -83,23 +95,29 @@ class Translation {
           pet: 'Følgesvenner: ',
           pg: 'GP: ',
           skills: 'Ferdigheter: '
+        },
+        sex: {
+          genderLabel: "Kjønn:",
+          female: ' hunkjønn',
+          male: ' hannkjønn',
+          gelding: ' vallak'
         }
       },
       pl: {
         stat: {
-          stamina: 'stamina',
-          speed: 'speed',
-          dressage: 'dressage',
-          gallop: 'gallop',
-          trot: 'trot',
-          jumping: 'jumping'
+          stamina: 'wytrzymałość',
+          speed: 'prędkość',
+          dressage: 'ujeżdżenie',
+          gallop: 'galop',
+          trot: 'kłus',
+          jumping: 'skoki'
         },
         competition: {
-          trot: 'Trot',
-          gallop: 'Gallop',
-          dressage: 'Dressage',
-          crossCountry: 'Cross-country',
-          showJumping: 'Show jumping',
+          trot: 'Kłus',
+          gallop: 'Galop',
+          dressage: 'Ujeżdżenie',
+          crossCountry: 'Biegi przełajowe',
+          showJumping: 'Skoki przez przeszkody',
           barrelRacing: 'Barrel racing',
           cutting: 'Cutting',
           trailClass: 'Trail class',
@@ -108,9 +126,15 @@ class Translation {
           disclaimer: 'The higher the coefficient, the greater the chance of winning'
         },
         other: {
-          pet: 'Pet: ',
+          pet: 'Towarzysz: ',
           pg: 'GP: ',
-          skills: 'Skills: '
+          skills: 'Umiejętności: '
+        },
+        sex: {
+          genderLabel: "Płeć:",
+          female: ' klacz',
+          male: ' ogier',
+          gelding: ' wałach'
         }
       },
       es: {
@@ -139,6 +163,12 @@ class Translation {
           pet: 'Mascota: ',
           pg: 'PG: ',
           skills: 'Habilidades: '
+        },
+        sex: {
+          genderLabel: "Sexo:",
+          female: ' hembra',
+          male: ' macho',
+          gelding: ' castrado'
         }
       }
     }
