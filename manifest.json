@@ -2,28 +2,53 @@
   "name": "__MSG_appName__",
   "description": "__MSG_appDesc__",
   "default_locale": "fr",
-  "version": "2.1.2",
+  "version": "2.5.0",
   "manifest_version": 3,
   "author": "TC-Dev",
+  "permissions": ["storage"],
   "icons": {
     "16": "/images/icon-16x16.png",
     "32": "/images/icon-32x32.png",
     "48": "/images/icon-48x48.png",
     "128": "/images/icon-128x128.png"
   },
+  "web_accessible_resources": [
+    {
+      "resources": ["images/male.png", "images/female.png", "images/gelding.png"],
+      "matches": [
+        "*://*.equideow.com/*",
+        "*://*.howrse.com/*",
+        "*://*.howrse.no/*",
+        "*://*.howrse.co.uk/*",
+        "*://*.caballow.com/*",
+        "*://*.howrse.pl/*",
+        "*://*.howrse.de/*"
+      ]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
   "content_scripts": [
     {
       "matches": [
         "*://*.equideow.com/*",
         "*://*.howrse.com/*",
-        "*://*.howrse.no/*"
+        "*://*.howrse.no/*",
+        "*://*.howrse.co.uk/*",
+        "*://*.caballow.com/*",
+        "*://*.howrse.pl/*",
+        "*://*.howrse.de/*"
       ],
       "run_at": "document_end",
       "js": [
         "translation.js",
         "loadingDisplayObserver.js",
         "moreInfos.js",
-        "horseStats.js",
+        "competitionRatio.js",
         "foodSelect.js"
       ]
     }

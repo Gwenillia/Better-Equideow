@@ -13,27 +13,37 @@ class FoodSelect {
     this.haySelectors = this.haySlider?.getElementsByTagName("span")
     this.oatsSlider = document.getElementById("oatsSlider") || null
     this.oatsSelectors = this.oatsSlider?.getElementsByTagName("span")
+    this.careTabFeed = document.getElementById('care-tab-feed')
+    this.messageBox = this.careTabFeed.querySelector("#messageBoxInline")?.textContent
+    this.fourrageNode = document.getElementsByClassName("section-fourrage section-fourrage-target")[0]
+    this.avoineNode = document.getElementsByClassName("section-avoine section-avoine-target")[0]
   }
 
   getFoodIndex(foodNode) {
-    const foodValue = foodNode.textContent
-    const foodIndex = parseInt(foodValue)
-    return foodIndex
+    if (this.messageBox && foodNode === this.fourrageNode) {
+      return this.messageBox.includes('20') ? 20 : 0
+    } 
+    else {
+      const foodValue = foodNode.textContent
+      const foodIndex = parseInt(foodValue)
+      return foodIndex
+    }
   }
 
   async run() {
-    const fourrageNode = document.getElementsByClassName("section-fourrage section-fourrage-target")[0]
-    const avoineNode = document.getElementsByClassName("section-avoine section-avoine-target")[0]
+    chrome.storage.sync.get({ 'foodSelect': true }, (data) => {
+      if (data.foodSelect) {
+        if (this.fourrageNode) {
+          const fourrageIndex = this.getFoodIndex(this.fourrageNode)
+          this.haySelectors[fourrageIndex].click()
+        }
 
-    if (fourrageNode) {
-      const fourrageIndex = this.getFoodIndex(fourrageNode)
-      this.haySelectors[fourrageIndex].click()
-    }
-
-    if (avoineNode) {
-      const avoineIndex = this.getFoodIndex(avoineNode)
-      this.oatsSelectors[avoineIndex].click()
-    }
+        if (this.avoineNode) {
+          const avoineIndex = this.getFoodIndex(this.avoineNode)
+          this.oatsSelectors[avoineIndex].click()
+        }
+      }
+    })
   }
 }
 

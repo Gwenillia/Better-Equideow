@@ -6,7 +6,7 @@
  * You should have received a copy of the GNU General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-class HorseStats {
+class CompetitionRatio {
   constructor() {
     this.lang = translation.getLang(window.location.href)
     this.characteristicsContainer = document.getElementById('characteristics-body-content')
@@ -169,12 +169,16 @@ class HorseStats {
   }
 
   run() {
-    document.addEventListener('keyup', this.handleArrowKeySwitch)
-    this.competitionsDiffDisplay()
+    chrome.storage.sync.get({ 'competitionRatio': true }, (data) => {
+      if (data.competitionRatio) {
+        document.addEventListener('keyup', this.handleArrowKeySwitch)
+        this.competitionsDiffDisplay()
+      }
+    })
   }
 }
 
 if (window.location.href.indexOf('elevage/chevaux/cheval') > -1) {
-  const horseStats = new HorseStats()
-  horseStats.run()
+  const competitionRatio = new CompetitionRatio()
+  competitionRatio.run()
 }

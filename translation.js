@@ -27,6 +27,12 @@ class Translation {
           pet: 'Compagnon: ',
           pg: 'PG: ',
           skills: 'Compétences: '
+        },
+        sex: {
+          genderLabel: "Sexe :",
+          female: ' femelle',
+          male: ' mâle',
+          gelding: ' hongre'
         }
       },
       en: {
@@ -55,6 +61,12 @@ class Translation {
           pet: 'Pet: ',
           pg: 'GP: ',
           skills: 'Skills: '
+        },
+        sex: {
+          genderLabel: "Gender:",
+          female: ' female',
+          male: ' male',
+          gelding: ' gelding'
         }
       },
       no: {
@@ -83,20 +95,137 @@ class Translation {
           pet: 'Følgesvenner: ',
           pg: 'GP: ',
           skills: 'Ferdigheter: '
+        },
+        sex: {
+          genderLabel: "Kjønn:",
+          female: ' hunkjønn',
+          male: ' hannkjønn',
+          gelding: ' vallak'
+        }
+      },
+      pl: {
+        stat: {
+          stamina: 'wytrzymałość',
+          speed: 'prędkość',
+          dressage: 'ujeżdżenie',
+          gallop: 'galop',
+          trot: 'kłus',
+          jumping: 'skoki'
+        },
+        competition: {
+          trot: 'Kłus',
+          gallop: 'Galop',
+          dressage: 'Ujeżdżenie',
+          crossCountry: 'Biegi przełajowe',
+          showJumping: 'Skoki przez przeszkody',
+          barrelRacing: 'Barrel racing',
+          cutting: 'Cutting',
+          trailClass: 'Trail class',
+          reining: 'Reining',
+          westernPleasure: 'Western pleasure',
+          disclaimer: 'Im wyższy współczynnik tym większa szansa na wygraną'
+        },
+        other: {
+          pet: 'Towarzysz: ',
+          pg: 'PG: ',
+          skills: 'Umiejętności: '
+        },
+        sex: {
+          genderLabel: "Płeć:",
+          female: ' klacz',
+          male: ' ogier',
+          gelding: ' wałach'
+        }
+      },
+      es: {
+        stat: {
+          stamina: 'resistencia',
+          speed: 'velocidad',
+          dressage: 'doma',
+          gallop: 'galope',
+          trot: 'trote',
+          jumping: 'salto'
+        },
+        competition: {
+          trot: 'Trote',
+          gallop: 'Galope',
+          dressage: 'Doma',
+          crossCountry: 'Cross',
+          showJumping: 'Carrera de obstáculos',
+          barrelRacing: 'Barrel racing',
+          cutting: 'Cutting',
+          trailClass: 'Trail class',
+          reining: 'Reining',
+          westernPleasure: 'Western pleasure',
+          disclaimer: 'Cuanto mayores sean las habilidades, mayores serán las posibilidades de ganar'
+        },
+        other: {
+          pet: 'Mascota: ',
+          pg: 'PG: ',
+          skills: 'Habilidades: '
+        },
+        sex: {
+          genderLabel: "Sexo:",
+          female: ' hembra',
+          male: ' macho',
+          gelding: ' castrado'
+        }
+      },
+      de: {
+        stat: {
+          stamina: 'ausdauer',
+          speed: 'tempo',
+          dressage: 'dressur',
+          gallop: 'galopp',
+          trot: 'trab',
+          jumping: 'springen'
+        },
+        competition: {
+          trot: 'Trab',
+          gallop: 'Galopp',
+          dressage: 'Dressur',
+          crossCountry: 'Cross',
+          showJumping: 'Springturnier',
+          barrelRacing: 'Barrel Racing',
+          cutting: 'Cutting',
+          trailClass: 'Trail',
+          reining: 'Reining',
+          westernPleasure: 'Western Pleasure',
+          disclaimer: 'Je höher der Koeffizient, desto größer die Gewinnchance'
+        },
+        other: {
+          pet: 'Kamerad: ',
+          pg: 'GP: ',
+          skills: 'Fähigkeiten: '
+        },
+        sex: {
+          genderLabel: "Geschlecht:",
+          female: ' weiblich',
+          male: ' männlich',
+          gelding: ' Wallach'
         }
       }
     }
   }
 
   getLang(url) {
-    const hostname = (new URL(url)).hostname
-    if (hostname.includes('equideow')) {
-      return 'fr'
-    } else if (hostname.includes('howrse.com')) {
-      return 'en'
+    const hostname = (new URL(url)).hostname;
+  
+    const languageMap = {
+      'equideow': 'fr',
+      'howrse.no': 'no',
+      'howrse.pl': 'pl',
+      'caballow.com': 'es',
+      'howrse.de': 'de'
+    };
+
+    for (let domain in languageMap) {
+      if (hostname.includes(domain)) {
+        return languageMap[domain];
+      }
     }
 
-    return hostname.match(/\.([^.]+)$/)[1]
+    return 'en'; 
   }
 
   get(lang, category, key) {
