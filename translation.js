@@ -123,11 +123,11 @@ class Translation {
           trailClass: 'Trail class',
           reining: 'Reining',
           westernPleasure: 'Western pleasure',
-          disclaimer: 'The higher the coefficient, the greater the chance of winning'
+          disclaimer: 'Im wyższy współczynnik tym większa szansa na wygraną'
         },
         other: {
           pet: 'Towarzysz: ',
-          pg: 'GP: ',
+          pg: 'PG: ',
           skills: 'Umiejętności: '
         },
         sex: {
@@ -170,6 +170,40 @@ class Translation {
           male: ' macho',
           gelding: ' castrado'
         }
+      },
+      de: {
+        stat: {
+          stamina: 'ausdauer',
+          speed: 'tempo',
+          dressage: 'dressur',
+          gallop: 'galopp',
+          trot: 'trab',
+          jumping: 'springen'
+        },
+        competition: {
+          trot: 'Trab',
+          gallop: 'Galopp',
+          dressage: 'Dressur',
+          crossCountry: 'Cross',
+          showJumping: 'Springturnier',
+          barrelRacing: 'Barrel Racing',
+          cutting: 'Cutting',
+          trailClass: 'Trail',
+          reining: 'Reining',
+          westernPleasure: 'Western Pleasure',
+          disclaimer: 'Je höher der Koeffizient, desto größer die Gewinnchance'
+        },
+        other: {
+          pet: 'Kamerad: ',
+          pg: 'GP: ',
+          skills: 'Fähigkeiten: '
+        },
+        sex: {
+          genderLabel: "Geschlecht:",
+          female: ' weiblich',
+          male: ' männlich',
+          gelding: ' Wallach'
+        }
       }
     }
   }
@@ -181,7 +215,8 @@ class Translation {
       'equideow': 'fr',
       'howrse.no': 'no',
       'howrse.pl': 'pl',
-      'caballow.com': 'es'
+      'caballow.com': 'es',
+      'howrse.de': 'de'
     };
 
     for (let domain in languageMap) {

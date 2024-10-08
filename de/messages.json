@@ -1,0 +1,23 @@
+{
+  "appName": {
+    "message": "Better Howrse",
+    "description": "Name of the extension."
+  },
+  "appDesc": {
+    "message": "This extension displays more informations in the game about horses and competitions to make you feel more comfortable when playing.",
+    "description": "Description of the extension."
+  },
+  "foodSelect": {
+    "message": "Auto Food Select",
+    "description": "Label for the food select checkbox in popup."
+  },
+  "moreInfos": {
+    "message": "More Infos",
+    "description": "Label for the more infos checkbox in popup"
+  },
+  "competitionRatio": {
+    "message": "Competition Ratio",
+    "description": "Label for the competition ratio checkbox in popup"
+  }
+}
+

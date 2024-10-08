@@ -21,7 +21,8 @@
         "*://*.howrse.no/*",
         "*://*.howrse.co.uk/*",
         "*://*.caballow.com/*",
-        "*://*.howrse.pl/*"
+        "*://*.howrse.pl/*",
+        "*://*.howrse.de/*"
       ]
     }
   ],
@@ -39,7 +40,8 @@
         "*://*.howrse.no/*",
         "*://*.howrse.co.uk/*",
         "*://*.caballow.com/*",
-        "*://*.howrse.pl/*"
+        "*://*.howrse.pl/*",
+        "*://*.howrse.de/*"
       ],
       "run_at": "document_end",
       "js": [
